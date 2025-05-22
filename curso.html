@@ -1,0 +1,78 @@
+<!-- curso.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Curso</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .course-header {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .course-header img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .course-info {
+      flex: 1;
+    }
+
+    .course-info h1 {
+      margin-bottom: 10px;
+    }
+
+    .course-info p {
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .course-info button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="courseDetail">
+    <!-- Se cargan los datos desde JS -->
+  </div>
+
+  <script src="js/curso.js"></script>
+</body>
+</html>

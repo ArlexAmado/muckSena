@@ -1,0 +1,63 @@
+/* css/styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #005fa3;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+}
+
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+
+#categoryMenu button {
+  margin: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
