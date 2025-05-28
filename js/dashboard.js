@@ -1,19 +1,27 @@
 // Esperar a que el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  // Obtener y mostrar el nombre del usuario desde localStorage
-  const user = JSON.parse(localStorage.getItem("loggedInUser"));
-  if (user && user.name) {
-    document.getElementById("username").textContent = user.name;
-  }
 
-  // Evento de cerrar sesión
+  // Obtener y mostrar el nombre del usuario desde localStorage
+  const session = JSON.parse(localStorage.getItem("session"));
+if (session && session.loggedIn) {
+  const usernameSpan = document.getElementById("username");
+  if (usernameSpan) {
+    usernameSpan.textContent = session.username;
+  }
+} else {
+  alert("Debes iniciar sesión primero.");
+  window.location.href = "login.html";
+}
+
+
+/*   // Evento de cerrar sesión
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");
       window.location.href = "index.html";
     });
-  }
+  } */
 
   // Cursos por categoría
   const coursesByCategory = {
@@ -32,6 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     Diseño: [
       {
         title: "Diseño UX/UI desde Cero",
+        description: "Conoce los principios del diseño centrado en el usuario.",
+        image: "img/uxui-course.jpg",
+      },
+      {
+        title: "Diseño UX/UI desde Cerooo",
         description: "Conoce los principios del diseño centrado en el usuario.",
         image: "img/uxui-course.jpg",
       },

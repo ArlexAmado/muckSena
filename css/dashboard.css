@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111;
+  background-color: #299fd6;
   color: white;
   padding: 10px 30px;
   position: sticky;
@@ -37,7 +37,7 @@ body {
 }
 
 #logoutBtn {
-  color: #1e90ff;
+  color: #000305;
   text-decoration: none;
   font-weight: bold;
 }

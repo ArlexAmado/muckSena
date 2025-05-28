@@ -1,4 +1,4 @@
-// js/auth.js
+/* // js/auth.js
 
 // Guardar usuario nuevo
 const registerForm = document.getElementById("registerForm");
@@ -35,3 +35,4 @@ if (loginForm) {
     }
   });
 }
+ */
