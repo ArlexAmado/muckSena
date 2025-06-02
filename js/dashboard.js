@@ -41,7 +41,7 @@ if (session && session.loggedIn) {
       {
         title: "Diseño UX/UI desde Cero",
         description: "Conoce los principios del diseño centrado en el usuario.",
-        image: "img/uxui-course.jpg",
+        image: "images/cursos/ux.jpg",
       },
       {
         title: "Diseño UX/UI desde Cerooo",
@@ -53,14 +53,14 @@ if (session && session.loggedIn) {
       {
         title: "Marketing Digital en Redes Sociales",
         description: "Aprende a usar Facebook, Instagram y TikTok para tu negocio.",
-        image: "img/marketing-course.jpg",
+        image: "images/cursos/digital.jpg",
       },
     ],
     Negocios: [
       {
         title: "Emprendimiento y Modelo de Negocio",
         description: "Crea un plan de negocio sólido y ponlo en marcha.",
-        image: "img/business-course.jpg",
+        image: "images/cursos/emprendimiento.jpg",
       },
     ],
   };
