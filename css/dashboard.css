@@ -26,6 +26,12 @@ body {
   gap: 20px;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .socials span {
   margin-right: 10px;
 }
@@ -37,9 +43,13 @@ body {
 }
 
 #logoutBtn {
-  color: #000305;
-  text-decoration: none;
-  font-weight: bold;
+  color: #f4f5f7;
+  text-decoration: none;  
+  font-weight: abolder;   
+  padding: 6px 12px;
+  background-color: #6db6fa;
+  border-radius: 7px;
+  transition: background-color 0.3s ease;
 }
 
 .dropdown {
@@ -47,7 +57,7 @@ body {
 }
 
 .dropdown-btn {
-  background-color: #007bff;
+  background-color: #6db6fa;
   color: white;
   padding: 6px 12px;
   border: none;
@@ -129,3 +139,228 @@ main {
   cursor: pointer;
   font-weight: bold;
 }
+
+
+
+/* Modals dashboard */
+
+    #login-container, #register-container {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Modal tipo split */
+    .split-modal {
+      display: flex;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      overflow: hidden;
+      max-width: 800px;
+      width: 100%;
+      min-height: 400px;
+    }
+    .split-modal-left {
+      background: #f7f7fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      min-width: 300px;
+    }
+    .split-modal-left img {
+      max-width: 90%;
+      max-height: 350px;
+    }
+    .split-modal-right {
+      width: 50%;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .split-modal-right h2 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      color: #22223b;
+      font-weight: bold;
+    }
+    .split-modal-right input[type="email"], .split-modal-right input[type="text"], .split-modal-right input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .ver-curso-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #6c2bd7;
+      margin-bottom: 10px;
+    }
+    .divider {
+      text-align: center;
+      color: #888;
+      margin: 18px 0 10px 0;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #eee;
+      line-height: 0.1em;
+    }
+    .divider:before {
+      content: "";
+      display: inline-block;
+      width: 0%;
+      border-bottom: 1px solid #eee;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .divider:after {
+      content: "";
+      display: inline-block;
+      width: 34%;
+      border-bottom: 1px solid #eee;
+      margin-left: 10px;
+      /* vertical-align: middle; */
+    }
+    .social-login {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .social-btn:hover {
+      box-shadow: 0 2px 8px rgba(108,43,215,0.12);
+    }
+    .login-links {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.97rem;
+    }
+    .login-links a {
+      color: #6c2bd7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .login-links a:hover {
+      text-decoration: underline;
+    }
+    /* Dropdown usuario */
+    .user-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .user-dropdown-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .user-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: white;
+      min-width: 160px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      z-index: 3000;
+      overflow: hidden;
+    }
+    .user-dropdown-content a {
+      color: #333;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .user-dropdown-content a:hover {
+      background: #f1f1f1;
+    }
+    .user-dropdown:focus-within .user-dropdown-content,
+    .user-dropdown:hover .user-dropdown-content {
+      display: block;
+    }
+
+      /* Modal formulario recuperacion de contraseña */
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.4);
+          justify-content: center;
+          align-items: center;
+        }
+    
+        .modal-content {
+          background: #fff;
+          padding: 30px;
+          border-radius: 10px;
+          min-width: 300px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        .close-btn {
+          margin-left: 10px;
+          background: #ccc;
+          color: #222;
+        }
+
+        .recovery-btn {
+          background-color: #6c2bd7;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          padding: 10px 18px;
+          font-size: 1rem;
+          cursor: pointer;
+          margin-right: 8px;
+          transition: background 0.2s;
+        }
+
+        .recovery-btn:hover {
+          background-color: #4b1a9a;
+        }
+
+        .recovery-cancel-btn {
+          background-color: #eee;
+          color: #333;
+          border: none;
+          border-radius: 6px;
+          padding: 10px 18px;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+
+        .recovery-cancel-btn:hover {
+          background-color: #ccc;
+        }
+
+        /* ----------------------------------- */

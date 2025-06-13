@@ -2,7 +2,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  display: flex;
+  /* display: flex; */
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ h1 {
 
 form input {
   display: block;
-  width: 100%;
+  width: 94%;
   padding: 10px;
   margin: 8px 0;
   border-radius: 6px;
@@ -32,17 +32,61 @@ form input {
 }
 
 form button {
-  width: 100%;
+  /* width: 100%; */
   padding: 10px;
-  background-color: #0077cc;
+  /* background-color: #0077cc; */
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
-form button:hover {
+.password-group {
+  position: relative;
+  width: 100%;
+}
+
+.password-group input {
+  width: 100%;
+  padding-right: 40px; /* Espacio para el botón del ojo */
+  box-sizing: border-box;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+ /*  background: none; */
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 0 6px;
+  color: #555;
+}
+
+/* .toggle-password-btn:focus {
+  outline: 2px solid #0077cc;
+} */
+
+.save-btn {
+  width: 100%;
+  margin-top: 12px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.save-btn:hover {
   background-color: #005fa3;
+}
+
+form button:hover {
+  background-color: #a3d2f3;
 }
 
 p {

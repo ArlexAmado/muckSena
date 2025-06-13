@@ -1,0 +1,41 @@
+PLAN DE ACCIÓN PARA DESARROLLAR LA APP
+
+1. Seguridad y autenticación
+- *Encriptar contraseñas en el backend con bcrypt antes de guardarlas en MongoDB.
+- *Validar datos de entrada en el backend (correo válido, contraseña fuerte).
+- *Implementar cierre de sesión real (limpiar sesión y redirigir).
+- *Proteger rutas del backend para que solo usuarios autenticados accedan a ciertos datos.
+
+2. Gestión de usuarios
+- *Crear y mostrar una página de perfil de usuario (ver y editar datos).
+- *Permitir cambiar contraseña.
+- Implementar recuperación de contraseña (enviar correo o restablecer).
+
+3. Gestión de cursos
+- Guardar y mostrar cursos desde MongoDB Atlas (no solo en JS local).
+- Permitir que los usuarios se inscriban/desinscriban en cursos.
+- Mostrar los cursos inscritos en el perfil del usuario.
+- Permitir a los usuarios marcar progreso o completar cursos.
+
+4. Panel de administración
+- Crear un panel para que administradores puedan agregar, editar y eliminar cursos.
+- Gestionar usuarios desde el panel (ver, bloquear, eliminar).
+
+5. Mejoras de interfaz y experiencia
+- Hacer la app completamente responsive (móvil/tablet).
+- Agregar notificaciones visuales (SweetAlert2, Toastify, etc).
+- Mejorar animaciones y transiciones de modales.
+- Personalizar la experiencia según el usuario (bienvenida, avatar, etc).
+
+6. Despliegue y producción
+- Subir el backend a un servicio como Render, Railway o Heroku.
+- Subir el frontend a Netlify o Vercel.
+- Configurar variables de entorno seguras para las claves de MongoDB.
+
+7. Extras y escalabilidad
+- Implementar autenticación con Google, Facebook, etc.
+- Agregar comentarios o foros en los cursos.
+- Sistema de calificaciones o reseñas para cursos.
+- Notificaciones por email (por ejemplo, al registrarse o inscribirse a un curso).
+
+¡Puedes avanzar punto por punto según tus prioridades!

@@ -5,190 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cursos en Línea</title>
   <link rel="stylesheet" href="css/dashboard.css" />
-  <!-- <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f5f5;
-    }
-
-    header {
-      background-color: #222;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .social-icons a {
-      color: white;
-      margin-right: 10px;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logout {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    nav.navbar {
-      background-color: #444;
-      padding: 10px 30px;
-      display: flex;
-      gap: 15px;
-    }
-
-    nav.navbar .dropdown {
-      position: relative;
-    }
-
-    nav.navbar .dropdown button {
-      background-color: #0077cc;
-      border: none;
-      color: white;
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    nav.navbar .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #fff;
-      min-width: 160px;
-      top: 45px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-
-    nav.navbar .dropdown-content a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-    }
-
-    nav.navbar .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-
-    nav.navbar .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    main {
-      padding: 40px 30px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .course-featured {
-      background-color: #fff;
-      padding: 30px;
-      max-width: 800px;
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .course-featured img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    .course-featured h2 {
-      margin-bottom: 10px;
-      font-size: 26px;
-    }
-
-    .course-featured p {
-      margin-bottom: 15px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .course-featured .duration {
-      font-weight: bold;
-      color: #0077cc;
-      margin-bottom: 15px;
-    }
-
-    .course-featured button {
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .course-featured button:hover {
-      background-color: #005fa3;
-    }
-  </style> -->
+  <link rel="stylesheet" href="css/styles.css" />
+ 
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">MyCourses 📘</div>
-    
-    <div class="nav-right">
-      <div class="socials">
-        <span>🦩</span>
-        <span>💼</span>
+  <!-- Modal de login tipo split -->
+  <div id="login-container">
+    <div class="split-modal">
+      <div class="split-modal-left">
+        <img src="images/login/login.webp" alt="Ilustración" />
       </div>
-      <div class="user-info">
-        <span id="username">Usuario</span>
-        <a href="#" id="logoutBtn">Cerrar sesión</a>
-      </div>
-      <div class="dropdown">
-        <button class="dropdown-btn">Categorías</button>
-        <div class="dropdown-content">
-          <a href="#" data-category="Programación">Programación</a>
-          <a href="#" data-category="Diseño">Diseño</a>
-          <a href="#" data-category="Marketing">Marketing</a>
-          <a href="#" data-category="Negocios">Negocios</a>
-        </div>
+      <div class="split-modal-right">
+        <form id="loginForm" autocomplete="off">
+          <h2>Inicia sesión para continuar tu experiencia de aprendizaje</h2>
+          <input type="email" id="usernameInput" placeholder="Correo electrónico" required autocomplete="off">
+          
+          
+          
+            <!-- Mostrar contraseña login -->
+          <div class="password-group">
+            <input type="password" id="passwordLogin" placeholder="Contraseña" />
+            <button type="button" id="toggleLoginPassword" class="toggle-password-btn">👁️</button>
+          </div>
+
+          <!-- <input type="password" id="passwordInput" placeholder="Contraseña" required autocomplete="off"> -->
+          <button type="submit" class="ver-curso-btn">
+            Iniciar sesión
+          </button>
+
+          <div class="login-links">
+            <span><a href="#" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a></span>
+          </div>
+
+          <div class="divider">Otras opciones de inicio de sesión</div>
+          <div class="social-login">
+            <button type="button" class="social-btn google">G</button>
+            <button type="button" class="social-btn facebook">f</button>
+            <button type="button" class="social-btn apple"></button>
+          </div>
+          <div class="login-links">
+            <span>¿No tienes una cuenta? <a href="#" id="registerBtn">Regístrate</a></span>
+          </div>
+        </form>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="course-container" id="featuredCourse">
-      <!-- Aquí se inyecta el curso desde JS -->
-    </section>
-  </main>
+  <!-- Modal de recuperación de contraseña -->
+  <div id="forgotPasswordModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Recuperar contraseña</h2>
+      <form id="forgotPasswordForm">
+        <input type="email" id="forgotPasswordEmail" placeholder="Tu correo electrónico" required>
+        <button type="submit" class="recovery-btn">Enviar enlace</button>
+        <button type="button" id="closeForgotPassword" class="recovery-cancel-btn">Cancelar</button>
+      </form>
+    </div>
+  </div>
 
-  
+  <!-- Modal de registro tipo split -->
+  <div id="register-container">
+    <div class="split-modal">
+      <div class="split-modal-left">
+        <img src="images/login/login.webp" alt="Ilustración" />
+      </div>
+      <div class="split-modal-right">
+        <form id="registerForm">
+          <h2>Registrarse</h2>
+          <input type="text" id="registerUsername" placeholder="Usuario" required>
+          <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+
+          <div class="password-group">
+            <input type="password" id="registerPassword" placeholder="Contraseña" required>
+            <button type="button" id="toggleRegisterPassword" class="toggle-password-btn">👁️</button>
+          </div>
+
+          <!-- <input type="password" id="registerPassword" placeholder="Contraseña" required> -->
+          <button type="submit" class="ver-curso-btn">Crear cuenta</button>
+          <div class="login-links">
+            <span>¿Ya tienes cuenta? <a href="#" id="loginBtnFromRegister">Inicia sesión</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard siempre visible -->
+  <div id="dashboard-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="logo">MyCourses 📘</div>
+        <div class="dropdown">
+          <button class="dropdown-btn">Categorías</button>
+          <div class="dropdown-content">
+            <a href="#" data-category="Programación">Programación</a>
+            <a href="#" data-category="Diseño">Diseño</a>
+            <a href="#" data-category="Marketing">Marketing</a>
+            <a href="#" data-category="Negocios">Negocios</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="socials">
+          <span>🦩</span>
+          <span>💼</span>
+        </div>
+        <div class="user-info">
+          <div class="user-dropdown">
+            <button class="user-dropdown-btn" id="userDropdownBtn">
+              <span id="username">Invitado</span> ⏷
+            </button>
+            <div class="user-dropdown-content" id="userDropdownContent">
+              <a href="#" id="profileOption">Mi perfil</a>
+              <a href="#" id="loginLogoutBtn">Iniciar sesión</a>
+              <!-- <a href="#" id="registerBtnDropdown">Registrarse</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="course-container" id="featuredCourse">
+        <!-- Aquí se inyecta el curso desde JS -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="frontend/js/auth.js"></script>
   <script src="js/dashboard.js"></script>
-  <script src="js/logout.js"></script>
-
-  
+  <script src="js/curso.js"></script>
 </body>
 </html>

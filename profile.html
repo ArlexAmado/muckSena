@@ -42,13 +42,20 @@
   <div class="container">
     <h1>Perfil del Usuario</h1>
     <form id="profileForm">
+
+      <label>Correo:</label>
+      <input type="email" id="profileEmail" readonly />
+      
       <label>Usuario:</label>
       <input type="text" id="profileUsername" readonly />
 
       <label>Nueva Contraseña:</label>
+    <div class="password-group">
       <input type="password" id="newPassword" placeholder="Dejar en blanco si no desea cambiar" />
-
-      <button type="submit">Guardar Cambios</button>
+      <button type="button" id="togglePassword" class="toggle-password-btn">👁️</button>
+    </div>
+    <button type="submit" class="save-btn">Guardar Cambios</button>
+    
     </form>
 
     <div class="nav-link">

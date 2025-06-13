@@ -1,27 +1,13 @@
 // Esperar a que el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-
   // Obtener y mostrar el nombre del usuario desde localStorage
   const session = JSON.parse(localStorage.getItem("session"));
-if (session && session.loggedIn) {
-  const usernameSpan = document.getElementById("username");
-  if (usernameSpan) {
-    usernameSpan.textContent = session.username;
+  if (session && session.loggedIn) {
+    const usernameSpan = document.getElementById("username");
+    if (usernameSpan) {
+      usernameSpan.textContent = session.username;
+    }
   }
-} else {
-  alert("Debes iniciar sesión primero.");
-  window.location.href = "login.html";
-}
-
-
-/*   // Evento de cerrar sesión
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    });
-  } */
 
   // Cursos por categoría
   const coursesByCategory = {

@@ -1,10 +1,11 @@
 // js/curso.js
-
 const course = JSON.parse(localStorage.getItem("selectedCourse"));
-
 const detailDiv = document.getElementById("courseDetail");
 
-if (!course) {
+if (!detailDiv) {
+  // Evita errores si el div no existe
+  console.warn('No se encontró el elemento con id "courseDetail"');
+} else if (!course) {
   detailDiv.innerHTML = "<p>No se encontró el curso seleccionado.</p>";
 } else {
   detailDiv.innerHTML = `
