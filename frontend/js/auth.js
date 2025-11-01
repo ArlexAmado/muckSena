@@ -94,7 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
 
-      const res = await fetch('/api/register', {
+      /* const res = await fetch('/api/register', { */
+      const res = await fetch('http://localhost:3000/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
@@ -117,7 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById('usernameInput').value;
       const password = document.getElementById('passwordLogin').value;
 
-      const res = await fetch('/api/login', {
+      /* const res = await fetch('/api/login', { */
+      const res = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -222,6 +224,67 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = 'profile.html';
     });
   }
+
+  // ========== CÓDIGO OAUTH - GOOGLE LOGIN (NUEVO) ==========
+  
+  // Handler del botón de Google
+  const googleBtn = document.getElementById('googleLoginBtn');
+  if (googleBtn) {
+    googleBtn.addEventListener('click', () => {
+      // Redirigir a la ruta de autenticación de Google
+      window.location.href = 'http://localhost:3000/api/auth/google';
+    });
+  }
+
+  // Verificar si hay un token en la URL (cuando Google redirige de vuelta)
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+  const loginStatus = urlParams.get('login');
+
+  if (loginStatus === 'fail' || loginStatus === 'error') {
+    alert('Error al iniciar sesión con Google. Intenta de nuevo.');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  if (token) {
+    // Obtener perfil del usuario con el token
+    fetch('http://localhost:3000/api/perfil', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Error al obtener perfil');
+      return res.json();
+    })
+    .then(data => {
+      console.log('✅ Usuario autenticado con Google:', data);
+      
+      // Guardar sesión en el mismo formato que tu login normal
+      localStorage.setItem('session', JSON.stringify({
+        loggedIn: true,
+        username: data.username,
+        email: data.email,
+        token: token
+      }));
+      
+      // Actualizar la UI
+      updateUserUI();
+      
+      // Mostrar mensaje de éxito
+      alert(`¡Bienvenido ${data.username}!`);
+    })
+    .catch(err => {
+      console.error('Error al obtener perfil:', err);
+      alert('Error al obtener datos del usuario');
+    })
+    .finally(() => {
+      // Limpiar la URL (quitar el token visible)
+      window.history.replaceState({}, document.title, window.location.pathname);
+    });
+  }
+  
+  // ============
 
   // Inicializar UI
   updateUserUI();

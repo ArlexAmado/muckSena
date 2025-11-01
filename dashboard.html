@@ -39,9 +39,18 @@
 
           <div class="divider">Otras opciones de inicio de sesión</div>
           <div class="social-login">
-            <button type="button" class="social-btn google">G</button>
-            <button type="button" class="social-btn facebook">f</button>
-            <button type="button" class="social-btn apple"></button>
+
+            <button id="googleLoginBtn" class="btn google">
+              <img src="images/login/G.png" alt="">
+            </button>  <!-- //Botón de Google personalizado -->
+
+             <button id="facebookLoginBtn"  class="social-btn facebook">
+                <img src="images/login/F.png" alt="">
+             </button>
+
+            <button id="AppleLoginBtn" class="social-btn apple">
+                <img src="images/login/A.png" alt="">
+            </button>
           </div>
           <div class="login-links">
             <span>¿No tienes una cuenta? <a href="#" id="registerBtn">Regístrate</a></span>
@@ -134,7 +143,7 @@
 
   <!-- Scripts -->
   <script src="frontend/js/auth.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/curso.js"></script>
+  <script src="frontend/js/dashboard.js"></script>
+  <script src="frontend/js/curso.js"></script>
 </body>
 </html>

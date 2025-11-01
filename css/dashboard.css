@@ -363,4 +363,90 @@ main {
           background-color: #ccc;
         }
 
+
+
+        #googleLoginBtn {
+          display: flex;
+          justify-content: center;  /* Centra horizontalmente */
+          align-items: center;      /* Centra verticalmente */
+          width: 50px;              /* Ajusta según el tamaño del botón */
+          height: 50px;
+          border: none;
+          border-radius: 50%;
+          background-color: white;  /* O el color que desees */
+          cursor: pointer;
+        }
+
+        #googleLoginBtn img{
+
+          width: 42px;
+          height: 42px;
+          object-fit: contain;
+        
+        }
+    
+
+
+
+          #facebookLoginBtn {
+          display: flex;
+          justify-content: center;  /* Centra horizontalmente */
+          align-items: center;      /* Centra verticalmente */
+          width: 50px;              /* Ajusta según el tamaño del botón */
+          height: 50px;
+          border: none;
+          border-radius: 50%;
+          background-color: white;  /* O el color que desees */
+          cursor: pointer;
+        }
+        #facebookLoginBtn img{
+
+          width: 42px;
+          height: 42px;
+          object-fit: contain;
+        
+        }
+
+
+
+          #AppleLoginBtn {
+          display: flex;
+          justify-content: center;  /* Centra horizontalmente */
+          align-items: center;      /* Centra verticalmente */
+          width: 50px;              /* Ajusta según el tamaño del botón */
+          height: 50px;
+          border: none;
+          border-radius: 50%;
+          background-color: white;  /* O el color que desees */
+          cursor: pointer;
+        }
+
+        #AppleLoginBtn img{
+
+          width: 42px;
+          height: 42px;
+          object-fit: contain;
+        
+        
+        }
+
+         .social-btn {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+      }
+
+      .social-btn img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+      }
+
         /* ----------------------------------- */
