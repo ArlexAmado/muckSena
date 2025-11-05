@@ -199,7 +199,7 @@ router.get('/auth/google/callback',
 
     // Usa la URL definida en .env o por defecto el 5501
       const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501';
-      res.redirect(`${frontendUrl}/dashboard.html?token=${token}`);
+      res.redirect(`${frontendUrl}/home.html?token=${token}`);
   }
 
   );

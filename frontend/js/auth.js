@@ -135,6 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUserUI();
         hideLoginModal();
         loginForm.reset();
+        
+        // Redirigir a home después del login exitoso
+        alert(`¡Bienvenido ${data.username}!`);
+        window.location.href = 'home.html';
       } else {
         alert(data.message);
       }
