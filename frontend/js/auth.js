@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginBtnFromRegister = document.getElementById('loginBtnFromRegister');
   const loginContainer = document.getElementById('login-container');
   const registerContainer = document.getElementById('register-container');
+  
+  // Botones del hero
+  const heroLoginBtn = document.getElementById('heroLoginBtn');
+  const heroRegisterBtn = document.getElementById('heroRegisterBtn');
 
   // Estado de autenticación
   function isLoggedIn() {

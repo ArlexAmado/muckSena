@@ -1,0 +1,634 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #f7f8fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar estilo Nextdoor */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  color: #333;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00a878;
+  letter-spacing: -0.5px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.socials {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.socials span {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  opacity: 0.7;
+}
+
+.socials span:hover {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#logoutBtn {
+  color: #6b7280;
+  text-decoration: none;  
+  font-weight: 500;   
+  padding: 0.6rem 1.2rem;
+  background-color: transparent;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+#logoutBtn:hover {
+  color: #00a878;
+  background: #f3f4f6;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  background-color: #00a878;
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 168, 120, 0.2);
+}
+
+.dropdown-btn:hover {
+  background-color: #008f68;
+  box-shadow: 0 2px 6px rgba(0, 168, 120, 0.3);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+.dropdown-content a {
+  padding: 0.8rem 1.2rem;
+  display: block;
+  text-decoration: none;
+  color: #374151;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.dropdown-content a:hover {
+  background-color: #f9fafb;
+  color: #00a878;
+}
+
+.dropdown:focus-within .dropdown-content,
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
+
+/* Hero/Landing Section estilo Nextdoor */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 20px;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #f7f8fa 0%, #e5e7eb 100%);
+}
+
+.course-container {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+.course-container img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-container h2 {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  color: #111827;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.course-container p {
+  margin: 1rem 0;
+  color: #6b7280;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.duration {
+  color: #00a878;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.ver-curso-btn {
+  background: #00a878;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 168, 120, 0.2);
+}
+
+.ver-curso-btn:hover {
+  background: #008f68;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 168, 120, 0.3);
+}
+
+/* Modals dashboard */
+#login-container, #register-container {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal tipo split */
+.split-modal {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+  min-height: 400px;
+}
+
+.split-modal-left {
+  background: #f7f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  min-width: 300px;
+}
+
+.split-modal-left img {
+  max-width: 90%;
+  max-height: 350px;
+}
+
+.split-modal-right {
+  width: 50%;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split-modal-right h2 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  color: #22223b;
+  font-weight: bold;
+}
+
+.split-modal-right input[type="email"], 
+.split-modal-right input[type="text"], 
+.split-modal-right input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.ver-curso-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #00a878;
+  margin-bottom: 10px;
+}
+
+.divider {
+  text-align: center;
+  color: #888;
+  margin: 18px 0 10px 0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #eee;
+  line-height: 0.1em;
+}
+
+.divider:before {
+  content: "";
+  display: inline-block;
+  width: 0%;
+  border-bottom: 1px solid #eee;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.divider:after {
+  content: "";
+  display: inline-block;
+  width: 34%;
+  border-bottom: 1px solid #eee;
+  margin-left: 10px;
+}
+
+.social-login {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.social-btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 168, 120, 0.12);
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.97rem;
+}
+
+.login-links a {
+  color: #00a878;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown usuario */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown-btn {
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.user-dropdown-btn:hover {
+  background: #f3f4f6;
+}
+
+.user-dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: white;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  z-index: 3000;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.user-dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+.user-dropdown-content a {
+  color: #374151;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.user-dropdown-content a:hover {
+  background: #f9fafb;
+  color: #00a878;
+}
+
+.user-dropdown:focus-within .user-dropdown-content,
+.user-dropdown:hover .user-dropdown-content,
+.user-dropdown-content:hover {
+  display: block;
+}
+
+/* Modal formulario recuperacion de contraseña */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  margin-left: 10px;
+  background: #ccc;
+  color: #222;
+}
+
+.recovery-btn {
+  background-color: #00a878;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+.recovery-btn:hover {
+  background-color: #008f68;
+}
+
+.recovery-cancel-btn {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recovery-cancel-btn:hover {
+  background-color: #ccc;
+}
+
+#googleLoginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+#googleLoginBtn img{
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+#facebookLoginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+#facebookLoginBtn img{
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+#AppleLoginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+#AppleLoginBtn img{
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.social-btn img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* Password toggle */
+.password-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.password-group input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 45px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  z-index: 10;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 15px;
+  }
+  
+  .navbar-left {
+    gap: 1rem;
+  }
+  
+  .nav-right {
+    gap: 1rem;
+  }
+  
+  .socials {
+    display: none;
+  }
+  
+  .course-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .course-container h2 {
+    font-size: 2rem;
+  }
+  
+  .split-modal {
+    flex-direction: column;
+    max-width: 90%;
+  }
+  
+  .split-modal-left {
+    width: 100%;
+    min-height: 200px;
+  }
+  
+  .split-modal-right {
+    width: 100%;
+  }
+}
