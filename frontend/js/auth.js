@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getUsername() {
     const session = JSON.parse(localStorage.getItem("session"));
-    return (session && session.username) || 'Invitado';
+    return (session && session.username) || 'Comenzar ahora';
   }
 
   // Actualiza la UI según el estado de sesión
