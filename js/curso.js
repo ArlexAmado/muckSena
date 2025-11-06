@@ -15,8 +15,10 @@ if (!detailDiv) {
         <h1>${course.title}</h1>
         <p>${course.description || "Este curso te enseñará desde los fundamentos hasta técnicas avanzadas."}</p>
         <button onclick="alert('Te has inscrito en el curso 🎉')">Inscribirse</button>
-        <a href="dashboard.html" class="back-link">← Volver al Dashboard</a>
+        <a href="home.html" class="back-link">← Volver Home</a>
+       
       </div>
     </div>
   `;
+   /* <a href="dashboard.html" class="back-link">← Volver al Dashboard</a> */
 }

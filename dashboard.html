@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cursos en Línea</title>
   <link rel="stylesheet" href="css/dashboard.css" />
-  <link rel="stylesheet" href="css/styles.css" />
  
 </head>
 <body>
@@ -39,9 +38,18 @@
 
           <div class="divider">Otras opciones de inicio de sesión</div>
           <div class="social-login">
-            <button type="button" class="social-btn google">G</button>
-            <button type="button" class="social-btn facebook">f</button>
-            <button type="button" class="social-btn apple"></button>
+
+            <button id="googleLoginBtn" class="btn google">
+              <img src="images/login/G.png" alt="">
+            </button>  <!-- //Botón de Google personalizado -->
+
+             <button id="facebookLoginBtn"  class="social-btn facebook">
+                <img src="images/login/F.png" alt="">
+             </button>
+
+            <button id="AppleLoginBtn" class="social-btn apple">
+                <img src="images/login/A.png" alt="">
+            </button>
           </div>
           <div class="login-links">
             <span>¿No tienes una cuenta? <a href="#" id="registerBtn">Regístrate</a></span>
@@ -113,7 +121,8 @@
         <div class="user-info">
           <div class="user-dropdown">
             <button class="user-dropdown-btn" id="userDropdownBtn">
-              <span id="username">Invitado</span> ⏷
+               <button class="btn-primary" id="username">C</button>
+              <!-- <span id="username">Comenzar ahora</span> ⏷ -->
             </button>
             <div class="user-dropdown-content" id="userDropdownContent">
               <a href="#" id="profileOption">Mi perfil</a>
@@ -126,15 +135,36 @@
     </header>
 
     <main>
-      <section class="course-container" id="featuredCourse">
-        <!-- Aquí se inyecta el curso desde JS -->
+      <section class="hero-landing">
+        <div class="hero-content">
+          <h1>Nunca pares de aprender</h1>
+          <p>Desarrolla las habilidades que necesitas para impulsar tu carrera profesional</p>
+          <div class="hero-buttons">
+            <button class="btn-primary" id="heroLoginBtn">Comenzar ahora</button>
+            <button class="btn-secondary" id="heroRegisterBtn">Crear cuenta gratis</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>+500</h3>
+              <p>Cursos disponibles</p>
+            </div>
+            <div class="stat-item">
+              <h3>+50K</h3>
+              <p>Estudiantes activos</p>
+            </div>
+            <div class="stat-item">
+              <h3>+100</h3>
+              <p>Profesores expertos</p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
 
   <!-- Scripts -->
   <script src="frontend/js/auth.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/curso.js"></script>
+  <script src="frontend/js/dashboard.js"></script>
+  <script src="frontend/js/curso.js"></script>
 </body>
 </html>

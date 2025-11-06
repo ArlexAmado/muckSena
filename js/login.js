@@ -18,6 +18,6 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   const session = { username: usuario.username, loggedIn: true };
   localStorage.setItem("session", JSON.stringify(session));
 
-  window.location.href = "dashboard.html";
   alert("Inicio de sesión exitoso.");
+  window.location.href = "home.html";
 });
