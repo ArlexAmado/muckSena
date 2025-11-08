@@ -1,77 +1,355 @@
-<!-- curso.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalles del Curso</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #0f01015d;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .course-header {
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .course-header img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 10px;
-    }
-
-    .course-info {
-      flex: 1;
-    }
-
-    .course-info h1 {
-      margin-bottom: 10px;
-    }
-
-    .course-info p {
-      margin-bottom: 20px;
-      color: #444;
-    }
-
-    .course-info button {
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .back-link {
-      display: block;
-      margin-top: 30px;
-      text-decoration: none;
-      color: #0077cc;
-      font-weight: bold;
-    }
-  </style>
+  <title>Detalles del Curso - MuckSena</title>
+  <link rel="stylesheet" href="css/curso.css">
 </head>
 <body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="logo">MuckSena 🎓</a>
+      <div class="nav-right">
+        <a href="home.html" class="back-link">← Volver a cursos</a>
+      </div>
+    </div>
+  </nav>
 
-  <div class="container" id="courseDetail">
-    <!-- Se cargan los datos desde JS -->
+  <!-- Hero del Curso -->
+  <section class="course-hero">
+    <div class="hero-container">
+      <div class="breadcrumb">
+        <a href="home.html">Inicio</a> / <a href="home.html">Cursos</a> / <span id="courseBreadcrumb">Curso</span>
+      </div>
+      
+      <div class="hero-content">
+        <div class="hero-left">
+          <span class="course-badge" id="courseBadge">Desarrollo Web</span>
+          <h1 id="courseTitle">Cargando curso...</h1>
+          <p class="course-subtitle" id="courseSubtitle">Descripción del curso</p>
+          
+          <div class="course-meta">
+            <div class="meta-item">
+              <span class="rating">⭐ <strong id="courseRating">4.8</strong></span>
+              <span class="students">(2,450 estudiantes)</span>
+            </div>
+            <div class="meta-item">
+              <span>👤 Creado por <strong id="courseInstructor">Instructor</strong></span>
+            </div>
+            <div class="meta-item">
+              <span>🕐 Última actualización: <strong>Noviembre 2024</strong></span>
+            </div>
+            <div class="meta-item">
+              <span>🌍 Español</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-right">
+          <div class="course-card">
+            <img id="courseImage" src="https://via.placeholder.com/400x250" alt="Curso">
+            <div class="card-content">
+              <div class="price-section">
+                <span class="price-current">$49.99</span>
+                <span class="price-original">$199.99</span>
+                <span class="discount">75% OFF</span>
+              </div>
+              <button class="btn-primary btn-large">Comprar ahora</button>
+              <button class="btn-secondary btn-large">Agregar al carrito</button>
+              
+              <div class="course-includes">
+                <h4>Este curso incluye:</h4>
+                <ul>
+                  <li>📹 12 horas de video bajo demanda</li>
+                  <li>📄 15 artículos</li>
+                  <li>💾 25 recursos descargables</li>
+                  <li>♾️ Acceso de por vida</li>
+                  <li>📱 Acceso en móvil y TV</li>
+                  <li>🏆 Certificado de finalización</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido Principal -->
+  <main class="course-main">
+    <div class="main-container">
+      <!-- Tabs de Navegación -->
+      <div class="course-tabs">
+        <button class="tab-btn active" data-tab="overview">Descripción general</button>
+        <button class="tab-btn" data-tab="curriculum">Contenido del curso</button>
+        <button class="tab-btn" data-tab="instructor">Instructor</button>
+        <button class="tab-btn" data-tab="reviews">Reseñas</button>
+      </div>
+
+      <!-- Tab: Descripción General -->
+      <div class="tab-content active" id="overview">
+        <section class="section">
+          <h2>Lo que aprenderás</h2>
+          <div class="learning-grid">
+            <div class="learning-item">✓ Dominar los fundamentos de JavaScript moderno</div>
+            <div class="learning-item">✓ Crear aplicaciones web interactivas</div>
+            <div class="learning-item">✓ Trabajar con APIs y datos externos</div>
+            <div class="learning-item">✓ Implementar mejores prácticas de código</div>
+            <div class="learning-item">✓ Usar herramientas de desarrollo profesionales</div>
+            <div class="learning-item">✓ Construir proyectos del mundo real</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Descripción</h2>
+          <div class="description">
+            <p>Este curso completo te llevará desde los conceptos básicos hasta técnicas avanzadas. Aprenderás haciendo, con proyectos prácticos que podrás agregar a tu portafolio.</p>
+            <p>Con más de 12 horas de contenido en video, ejercicios prácticos y proyectos reales, este curso está diseñado para que domines las habilidades necesarias para destacar en el mercado laboral.</p>
+            <p><strong>¿Para quién es este curso?</strong></p>
+            <ul>
+              <li>Principiantes que quieren aprender desde cero</li>
+              <li>Desarrolladores que buscan actualizar sus habilidades</li>
+              <li>Profesionales que quieren cambiar de carrera</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Requisitos</h2>
+          <ul class="requirements">
+            <li>Computadora con acceso a internet</li>
+            <li>Conocimientos básicos de HTML y CSS (recomendado)</li>
+            <li>Ganas de aprender y practicar</li>
+            <li>No se requiere experiencia previa en programación</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Tab: Contenido del Curso -->
+      <div class="tab-content" id="curriculum">
+        <section class="section">
+          <h2>Contenido del curso</h2>
+          <p class="curriculum-info">8 secciones • 45 clases • 12h 30m de duración total</p>
+          
+          <div class="curriculum-list">
+            <div class="curriculum-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">▼</span>
+                  <h3>Sección 1: Introducción</h3>
+                </div>
+                <span class="section-duration">5 clases • 45min</span>
+              </div>
+              <div class="section-content">
+                <div class="lecture-item">
+                  <span class="lecture-icon">▶️</span>
+                  <span class="lecture-title">Bienvenida al curso</span>
+                  <span class="lecture-duration">5:30</span>
+                </div>
+                <div class="lecture-item">
+                  <span class="lecture-icon">▶️</span>
+                  <span class="lecture-title">Configuración del entorno</span>
+                  <span class="lecture-duration">12:45</span>
+                </div>
+                <div class="lecture-item">
+                  <span class="lecture-icon">📄</span>
+                  <span class="lecture-title">Recursos descargables</span>
+                  <span class="lecture-duration">-</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="curriculum-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">▼</span>
+                  <h3>Sección 2: Fundamentos</h3>
+                </div>
+                <span class="section-duration">8 clases • 1h 30min</span>
+              </div>
+            </div>
+
+            <div class="curriculum-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <span class="section-icon">▼</span>
+                  <h3>Sección 3: Conceptos Avanzados</h3>
+                </div>
+                <span class="section-duration">12 clases • 2h 15min</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Tab: Instructor -->
+      <div class="tab-content" id="instructor">
+        <section class="section">
+          <h2>Tu instructor</h2>
+          <div class="instructor-card">
+            <img src="https://ui-avatars.com/api/?name=Instructor&size=120&background=98ca3f&color=fff" alt="Instructor" class="instructor-avatar">
+            <div class="instructor-info">
+              <h3 id="instructorName">Nombre del Instructor</h3>
+              <p class="instructor-title">Desarrollador Full Stack & Instructor</p>
+              <div class="instructor-stats">
+                <div class="stat">⭐ 4.8 Calificación</div>
+                <div class="stat">👥 15,000 Estudiantes</div>
+                <div class="stat">🎓 25 Cursos</div>
+              </div>
+              <p class="instructor-bio">
+                Con más de 10 años de experiencia en desarrollo web y 5 años enseñando, he ayudado a miles de estudiantes a alcanzar sus metas profesionales. Mi enfoque es práctico y orientado a resultados reales.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Tab: Reseñas -->
+      <div class="tab-content" id="reviews">
+        <section class="section">
+          <h2>Reseñas de estudiantes</h2>
+          <div class="reviews-summary">
+            <div class="rating-overview">
+              <div class="rating-number">4.8</div>
+              <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+              <div class="rating-count">2,450 calificaciones</div>
+            </div>
+            <div class="rating-bars">
+              <div class="rating-bar">
+                <span>⭐⭐⭐⭐⭐</span>
+                <div class="bar"><div class="bar-fill" style="width: 75%"></div></div>
+                <span>75%</span>
+              </div>
+              <div class="rating-bar">
+                <span>⭐⭐⭐⭐</span>
+                <div class="bar"><div class="bar-fill" style="width: 18%"></div></div>
+                <span>18%</span>
+              </div>
+              <div class="rating-bar">
+                <span>⭐⭐⭐</span>
+                <div class="bar"><div class="bar-fill" style="width: 5%"></div></div>
+                <span>5%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reviews-list">
+            <div class="review-item">
+              <div class="review-header">
+                <img src="https://ui-avatars.com/api/?name=Maria+Lopez&size=50&background=98ca3f&color=fff" alt="Usuario">
+                <div class="review-info">
+                  <h4>María López</h4>
+                  <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                  <span class="review-date">Hace 2 semanas</span>
+                </div>
+              </div>
+              <p class="review-text">Excelente curso! El instructor explica muy bien y los proyectos son muy útiles. Lo recomiendo 100%.</p>
+            </div>
+
+            <div class="review-item">
+              <div class="review-header">
+                <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&size=50&background=98ca3f&color=fff" alt="Usuario">
+                <div class="review-info">
+                  <h4>Carlos Ruiz</h4>
+                  <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                  <span class="review-date">Hace 1 mes</span>
+                </div>
+              </div>
+              <p class="review-text">Muy completo y bien estructurado. He aprendido muchísimo y ya conseguí trabajo gracias a este curso.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Botón flotante de compra (móvil) -->
+  <div class="floating-buy">
+    <div class="floating-buy-content">
+      <div class="floating-price">$49.99</div>
+      <button class="btn-primary">Comprar ahora</button>
+    </div>
   </div>
+
+  <!-- Cursos Relacionados -->
+  <section class="related-courses">
+    <div class="related-container">
+      <h2>Cursos relacionados</h2>
+      <div class="related-grid">
+        <div class="related-card">
+          <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=180&fit=crop" alt="Curso">
+          <div class="related-content">
+            <h4>React desde Cero</h4>
+            <p class="related-instructor">Ana García</p>
+            <div class="related-rating">⭐ 4.9</div>
+            <p class="related-price">$49.99</p>
+          </div>
+        </div>
+        <div class="related-card">
+          <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=300&h=180&fit=crop" alt="Curso">
+          <div class="related-content">
+            <h4>Python para Data Science</h4>
+            <p class="related-instructor">Roberto Díaz</p>
+            <div class="related-rating">⭐ 4.8</div>
+            <p class="related-price">$49.99</p>
+          </div>
+        </div>
+        <div class="related-card">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=180&fit=crop" alt="Curso">
+          <div class="related-content">
+            <h4>Node.js y Express</h4>
+            <p class="related-instructor">Juan Rodríguez</p>
+            <div class="related-rating">⭐ 4.9</div>
+            <p class="related-price">$49.99</p>
+          </div>
+        </div>
+        <div class="related-card">
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=180&fit=crop" alt="Curso">
+          <div class="related-content">
+            <h4>Diseño UX/UI Profesional</h4>
+            <p class="related-instructor">María López</p>
+            <div class="related-rating">⭐ 4.7</div>
+            <p class="related-price">$49.99</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>MuckSena</h4>
+          <p>Educación de calidad para todos</p>
+        </div>
+        <div class="footer-col">
+          <h4>Plataforma</h4>
+          <a href="home.html">Cursos</a>
+          <a href="#">Rutas</a>
+          <a href="#">Certificados</a>
+        </div>
+        <div class="footer-col">
+          <h4>Comunidad</h4>
+          <a href="#">Blog</a>
+          <a href="#">Foro</a>
+          <a href="#">Eventos</a>
+        </div>
+        <div class="footer-col">
+          <h4>Soporte</h4>
+          <a href="#">Ayuda</a>
+          <a href="#">Contacto</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 MuckSena. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="js/curso.js"></script>
 </body>

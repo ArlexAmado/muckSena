@@ -110,6 +110,10 @@ function authMiddleware(req, res, next) {
 const authRoutes = require('../backend/routes/auth');
 app.use('/api', authRoutes);
 
+// ========== RUTAS DE CURSOS ==========
+const coursesRoutes = require('../backend/routes/courses');
+app.use('/api/courses', coursesRoutes);
+
 // ========== RUTAS DE LA API ==========
 app.post('/api/register', async (req, res) => {
   const { username, email, password } = req.body;
