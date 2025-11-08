@@ -28,7 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Actualiza la UI según el estado de sesión
   function updateUserUI() {
-    if (usernameSpan) usernameSpan.textContent = getUsername();
+    if (usernameSpan) {
+      const username = getUsername();
+      
+      // Cambiar estilo del botón si está logueado
+      if (isLoggedIn()) {
+        // Agregar clase para usuario logueado
+        usernameSpan.classList.add('user-logged-in');
+        
+        // Solo mostrar el nombre
+        usernameSpan.textContent = username;
+      } else {
+        usernameSpan.classList.remove('user-logged-in');
+        usernameSpan.textContent = 'Comenzar ahora';
+      }
+    }
     if (isLoggedIn()) {
       if (loginLogoutBtn) loginLogoutBtn.textContent = 'Cerrar sesión';
       if (profileOption) profileOption.style.display = 'block';
@@ -59,6 +73,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Eventos de botones
+  
+  // Botón principal "Comenzar ahora" / nombre de usuario
+  if (usernameSpan) {
+    usernameSpan.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (isLoggedIn()) {
+        // Si está logueado, redirigir a home
+        window.location.href = 'home.html';
+      } else {
+        // Si no está logueado, mostrar modal de login
+        showLoginModal();
+      }
+    });
+  }
+  
   if (loginLogoutBtn) {
     loginLogoutBtn.addEventListener('click', function(e) {
       e.preventDefault();

@@ -143,21 +143,23 @@ body {
   display: block;
 }
 
-/* Hero/Landing Section */
+/* Hero/Landing Section - Compacto */
 main {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0;
-  min-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
+  overflow: hidden;
 }
 
 .hero-landing {
   width: 100%;
-  min-height: calc(100vh - 80px);
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 2rem 20px 1rem;
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
   position: relative;
@@ -202,6 +204,7 @@ main {
   text-align: center;
   position: relative;
   z-index: 1;
+  padding-top: 1rem;
 }
 
 .hero-content h1 {
@@ -232,7 +235,7 @@ main {
 .btn-primary {
   background: linear-gradient(135deg, #98ca3f 0%, #5cb85c 100%);
   color: #0f1419;
-  padding: 1.2rem 3rem;
+  padding: 1rem 1rem;
   border: none;
   border-radius: 30px;
   font-size: 1.1rem;
@@ -268,8 +271,8 @@ main {
   display: flex;
   justify-content: center;
   gap: 4rem;
-  margin-top: 4rem;
-  padding-top: 3rem;
+  margin-top: 4em;
+  padding-top: 1rem;
   border-top: 1px solid rgba(152, 202, 63, 0.2);
 }
 
@@ -280,7 +283,8 @@ main {
 .stat-item h3 {
   font-size: 3rem;
   color: #98ca3f;
-  font-weight: 800;
+  margin-top: 1rem;
+  font-weight: 900;
   margin-bottom: 0.5rem;
 }
 
@@ -861,3 +865,200 @@ main {
       }
 
         /* ----------------------------------- */
+
+
+/* ========== PASARELA DE TECNOLOGÍAS - Compacta ========== */
+.tech-brands {
+  background: #1a1f2e;
+  padding: 2rem 0 1rem;
+  overflow: visible;
+  border-top: 1px solid rgba(152, 202, 63, 0.1);
+  flex: 0 0 auto;
+}
+
+.tech-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 0px;
+}
+
+.tech-subtitle {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.tech-slider {
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 0 2.5rem 0;
+}
+
+.tech-slider::before,
+.tech-slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tech-slider::before {
+  left: 0;
+  background: linear-gradient(to right, #1a1f2e 0%, transparent 100%);
+}
+
+.tech-slider::after {
+  right: 0;
+  background: linear-gradient(to left, #1a1f2e 0%, transparent 100%);
+}
+
+.tech-track {
+  display: flex;
+  gap: 3rem;
+  animation: scroll 35s linear infinite;
+  width: fit-content;
+}
+
+.tech-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-logo {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(152, 202, 63, 0.1);
+  position: relative;
+}
+
+.tech-logo::after {
+  content: attr(data-tech);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: rgba(26, 31, 46, 0.95);
+  color: #98ca3f;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(152, 202, 63, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.tech-logo:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tech-logo:hover {
+  background: rgba(152, 202, 63, 0.1);
+  border-color: rgba(152, 202, 63, 0.3);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(152, 202, 63, 0.2);
+}
+
+.tech-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+
+.tech-logo:hover img {
+  filter: grayscale(0%) brightness(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tech-brands {
+    padding: 3rem 0;
+  }
+  
+  .tech-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tech-track {
+    gap: 2rem;
+    animation: scroll 30s linear infinite;
+  }
+  
+  .tech-logo {
+    width: 60px;
+    height: 60px;
+    padding: 0.75rem;
+  }
+  
+  .tech-slider::before,
+  .tech-slider::after {
+    width: 80px;
+  }
+}
+
+
+/* ========== BOTÓN DE USUARIO (NO LOGUEADO) ========== */
+.user-btn {
+  background: linear-gradient(135deg, #98ca3f 0%, #5cb85c 100%);
+  color: #0f1419;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(152, 202, 63, 0.3);
+}
+
+.user-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(152, 202, 63, 0.5);
+}
+
+/* ========== BOTÓN DE USUARIO (LOGUEADO) ========== */
+.user-btn.user-logged-in {
+  background: linear-gradient(135deg, #98ca3f 0%, #5cb85c 100%);
+  color: #0f1419;
+  padding: 1rem 2.5rem;
+  border: none;
+  box-shadow: 0 4px 15px rgba(152, 202, 63, 0.3);
+}
+
+.user-btn.user-logged-in:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(152, 202, 63, 0.5);
+}

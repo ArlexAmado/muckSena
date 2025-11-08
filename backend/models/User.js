@@ -7,7 +7,19 @@ const userSchema = new mongoose.Schema({
   googleId: String,  // ID único de Google
   avatar: String,    // URL del avatar (puede venir de Google)
   resetPasswordToken: String,
-  resetPasswordExpires: Date
+  resetPasswordExpires: Date,
+  purchasedCourses: [{
+    courseId: Number,
+    title: String,
+    description: String,
+    category: String,
+    instructor: String,
+    rating: Number,
+    image: String,
+    price: Number,
+    purchasedAt: { type: Date, default: Date.now },
+    progress: { type: Number, default: 0 }
+  }]
 });
 
 module.exports = mongoose.model('User', userSchema);

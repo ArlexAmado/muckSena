@@ -173,17 +173,87 @@ function loadCourses() {
     </div>
   `).join('');
 
-  // Agregar event listeners a las tarjetas de cursos
-  document.querySelectorAll('.course-card').forEach(card => {
-    card.addEventListener('click', () => {
+  // Agregar event listeners después de crear las tarjetas
+  setTimeout(() => {
+    attachCourseListeners();
+  }, 100);
+}
+
+// Función para agregar listeners a las tarjetas de cursos
+function attachCourseListeners() {
+  const courseCards = document.querySelectorAll('.course-card');
+  console.log('Agregando listeners a', courseCards.length, 'cursos');
+  
+  courseCards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
       const courseId = card.dataset.courseId;
+      console.log('Click en curso ID:', courseId);
       const course = courses.find(c => c.id == courseId);
       if (course) {
+        console.log('Curso encontrado:', course.title);
         localStorage.setItem('selectedCourse', JSON.stringify(course));
         window.location.href = 'curso.html';
+      } else {
+        console.log('Curso no encontrado');
       }
     });
   });
+}
+
+// Mostrar mis cursos comprados
+function showMyCourses() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const coursesGrid = document.getElementById('coursesGrid');
+  const sectionHeader = document.querySelector('.section-header h2');
+  
+  if (cart.length === 0) {
+    sectionHeader.textContent = 'Mis Cursos';
+    coursesGrid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem;">
+        <h3 style="font-size: 2rem; margin-bottom: 1rem; color: #9ca3af;">No tienes cursos aún</h3>
+        <p style="color: #6b7280; margin-bottom: 2rem;">Explora nuestro catálogo y comienza a aprender</p>
+        <button onclick="location.reload()" style="background: #98ca3f; color: #0f1419; padding: 1rem 2rem; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+          Explorar cursos
+        </button>
+      </div>
+    `;
+    return;
+  }
+  
+  sectionHeader.textContent = `Mis Cursos (${cart.length})`;
+  
+  // Mostrar cursos comprados
+  const purchasedCourseIds = cart.map(c => c.id);
+  const myCourses = courses.filter(c => purchasedCourseIds.includes(c.id));
+  
+  coursesGrid.innerHTML = myCourses.map(course => `
+    <div class="course-card" data-course-id="${course.id}">
+      <img src="${course.image}" alt="${course.title}" class="course-image">
+      <div class="course-content">
+        <span class="course-category">${course.category}</span>
+        <h3 class="course-title">${course.title}</h3>
+        <p class="course-description">${course.description}</p>
+        <div class="course-footer">
+          <div class="course-instructor">
+            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(course.instructor)}&background=98ca3f&color=fff&size=25" 
+                 alt="${course.instructor}" 
+                 class="instructor-avatar">
+            <span>${course.instructor}</span>
+          </div>
+          <div class="course-rating">
+            <span>✓</span>
+            <span>Comprado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  setTimeout(() => {
+    attachCourseListeners();
+  }, 100);
 }
 
 // Configurar event listeners
@@ -195,6 +265,28 @@ function setupEventListeners() {
       e.preventDefault();
       localStorage.removeItem('session');
       window.location.href = 'dashboard.html';
+    });
+  }
+  
+  // Mis Cursos - Permitir navegación normal al enlace
+  // El botón ahora navega directamente a mis-cursos.html
+  
+  // Explorar
+  const explorarBtn = document.getElementById('explorarBtn');
+  if (explorarBtn) {
+    explorarBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      loadCourses();
+      document.querySelector('.section-header h2').textContent = 'Cursos más populares';
+    });
+  }
+  
+  // Rutas
+  const rutasBtn = document.getElementById('rutasBtn');
+  if (rutasBtn) {
+    rutasBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Rutas de aprendizaje próximamente 🚀');
     });
   }
 
@@ -321,16 +413,9 @@ function displayFilteredCourses(filteredCourses, title) {
   `).join('');
 
   // Re-agregar event listeners
-  document.querySelectorAll('.course-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const courseId = card.dataset.courseId;
-      const course = courses.find(c => c.id == courseId);
-      if (course) {
-        localStorage.setItem('selectedCourse', JSON.stringify(course));
-        window.location.href = 'curso.html';
-      }
-    });
-  });
+  setTimeout(() => {
+    attachCourseListeners();
+  }, 100);
 
   // Scroll a la sección de cursos
   window.scrollTo({
