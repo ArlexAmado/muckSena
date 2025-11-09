@@ -23,7 +23,7 @@
           
             <!-- Mostrar contraseña login -->
           <div class="password-group">
-            <input type="password" id="passwordLogin" placeholder="Contraseña" />
+            <input type="password" id="passwordLogin" placeholder="Contraseña" required autocomplete="off" />
             <button type="button" id="toggleLoginPassword" class="toggle-password-btn">👁️</button>
           </div>
 
@@ -78,13 +78,13 @@
         <img src="images/login/login.webp" alt="Ilustración" />
       </div>
       <div class="split-modal-right">
-        <form id="registerForm">
+        <form id="registerForm" autocomplete="off">
           <h2>Registrarse</h2>
-          <input type="text" id="registerUsername" placeholder="Usuario" required>
-          <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+          <input type="text" id="registerUsername" placeholder="Usuario" required autocomplete="off">
+          <input type="email" id="registerEmail" placeholder="Correo electrónico" required autocomplete="off">
 
           <div class="password-group">
-            <input type="password" id="registerPassword" placeholder="Contraseña" required>
+            <input type="password" id="registerPassword" placeholder="Contraseña" required autocomplete="off">
             <button type="button" id="toggleRegisterPassword" class="toggle-password-btn">👁️</button>
           </div>
 

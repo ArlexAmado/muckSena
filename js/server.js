@@ -16,11 +16,13 @@ const User = require('../backend/models/User');
 const app = express();
 
 // ========== MIDDLEWARES BÁSICOS ==========
-app.use(express.json());
+// Aumentar límite de tamaño para imágenes en base64
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Configuración de CORS
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://127.0.0.1:5501'],
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://127.0.0.1:5501', 'http://localhost:5501'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -113,6 +115,10 @@ app.use('/api', authRoutes);
 // ========== RUTAS DE CURSOS ==========
 const coursesRoutes = require('../backend/routes/courses');
 app.use('/api/courses', coursesRoutes);
+
+// ========== RUTAS DE PERFIL ==========
+const profileRoutes = require('../backend/routes/profile');
+app.use('/api/profile', profileRoutes);
 
 // ========== RUTAS DE LA API ==========
 app.post('/api/register', async (req, res) => {

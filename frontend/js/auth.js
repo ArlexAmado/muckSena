@@ -127,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
 
-      /* const res = await fetch('/api/register', { */
       const res = await fetch('http://localhost:3000/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -151,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById('usernameInput').value;
       const password = document.getElementById('passwordLogin').value;
 
-      /* const res = await fetch('/api/login', { */
       const res = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
