@@ -1,8 +1,9 @@
 {
   "name": "mucksena",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "js/server.js",
   "scripts": {
+    "start": "node js/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "mongoose": "^8.15.1",
     "nodemailer": "^7.0.3",
     "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "sonarqube-scanner": "^4.3.2"
   }
 }
