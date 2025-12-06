@@ -150,28 +150,41 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById('usernameInput').value;
       const password = document.getElementById('passwordLogin').value;
 
-      const res = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem('session', JSON.stringify({
-          loggedIn: true,
-          username: data.username,
-          email: data.email,
-          token: data.token
-        }));
-        updateUserUI();
-        hideLoginModal();
-        loginForm.reset();
+      try {
+        const res = await fetch(`${API_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
 
-        // Redirigir a home después del login exitoso
-        alert(`¡Bienvenido ${data.username}!`);
-        window.location.href = 'home.html';
-      } else {
-        alert(data.message);
+        // Debug: Verificar si la respuesta es JSON
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          if (res.ok) {
+            localStorage.setItem('session', JSON.stringify({
+              loggedIn: true,
+              username: data.username,
+              email: data.email,
+              token: data.token
+            }));
+            updateUserUI();
+            hideLoginModal();
+            loginForm.reset();
+            alert(`¡Bienvenido ${data.username}!`);
+            window.location.href = 'home.html';
+          } else {
+            alert(data.message || 'Error en el inicio de sesión');
+          }
+        } else {
+          // Si no es JSON, mostrar info de depuración
+          const text = await res.text();
+          console.error('Respuesta no-JSON recibida:', text);
+          alert(`Error del servidor (${res.status}): La respuesta no fue JSON. Revisa la consola para más detalles.`);
+        }
+      } catch (err) {
+        console.error('Error de red o parsing:', err);
+        alert('Ocurrió un error al intentar iniciar sesión. Revisa tu conexión.');
       }
     });
   }
