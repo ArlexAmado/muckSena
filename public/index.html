@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MuckSena - Aprende sin límites</title>
+  <link rel="stylesheet" href="./css/home.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="#" class="logo">MuckSena 🎓</a>
+        <div class="search-bar">
+          <input type="text" placeholder="¿Qué quieres aprender hoy?">
+          <button class="search-btn">🔍</button>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a href="#" class="nav-link" id="explorarBtn">Explorar</a>
+        <a href="mis-cursos.html" class="nav-link" id="misCursosBtn">Mis Cursos</a>
+        <a href="#" class="nav-link" id="rutasBtn">Rutas</a>
+        <div class="user-menu">
+          <!-- <img src="https://ui-avatars.com/api/?name=Usuario&background=0D8ABC&color=fff" alt="Avatar" class="avatar"> -->
+          <span id="userName">Usuario</span>
+          <div class="dropdown-menu">
+            <a href="perfil.html">Mi perfil</a>
+            <a href="#" id="logoutBtn">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Nunca pares de aprender</h1>
+      <p>Desarrolla las habilidades que necesitas para impulsar tu carrera profesional</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <h3>+500</h3>
+          <p>Cursos disponibles</p>
+        </div>
+        <div class="stat">
+          <h3>+50K</h3>
+          <p>Estudiantes activos</p>
+        </div>
+        <div class="stat">
+          <h3>+100</h3>
+          <p>Profesores expertos</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" alt="Estudiantes">
+    </div>
+  </section>
+
+  <!-- Categorías -->
+  <section class="categories">
+    <div class="container">
+      <h2>Explora por categoría</h2>
+      <div class="category-grid">
+        <div class="category-card" data-category="desarrollo">
+          <div class="category-icon">💻</div>
+          <h3>Desarrollo Web</h3>
+          <p>120 cursos</p>
+        </div>
+        <div class="category-card" data-category="diseno">
+          <div class="category-icon">🎨</div>
+          <h3>Diseño UX/UI</h3>
+          <p>85 cursos</p>
+        </div>
+        <div class="category-card" data-category="marketing">
+          <div class="category-icon">📊</div>
+          <h3>Marketing Digital</h3>
+          <p>95 cursos</p>
+        </div>
+        <div class="category-card" data-category="negocios">
+          <div class="category-icon">💼</div>
+          <h3>Negocios</h3>
+          <p>70 cursos</p>
+        </div>
+        <div class="category-card" data-category="datos">
+          <div class="category-icon">📈</div>
+          <h3>Data Science</h3>
+          <p>60 cursos</p>
+        </div>
+        <div class="category-card" data-category="idiomas">
+          <div class="category-icon">🌍</div>
+          <h3>Idiomas</h3>
+          <p>45 cursos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cursos Destacados -->
+  <section class="featured-courses">
+    <div class="container">
+      <div class="section-header">
+        <h2>Cursos más populares</h2>
+        <a href="#" class="view-all">Ver todos →</a>
+      </div>
+      <div class="courses-grid" id="coursesGrid">
+        <!-- Los cursos se cargan dinámicamente con JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Rutas de Aprendizaje -->
+  <section class="learning-paths">
+    <div class="container">
+      <h2>Rutas de aprendizaje</h2>
+      <p class="subtitle">Sigue un camino estructurado para dominar una habilidad</p>
+      <div class="paths-grid">
+        <div class="path-card">
+          <div class="path-badge">Ruta</div>
+          <h3>Desarrollo Frontend</h3>
+          <p>Conviértete en desarrollador frontend profesional</p>
+          <div class="path-info">
+            <span>12 cursos</span>
+            <span>•</span>
+            <span>80 horas</span>
+          </div>
+          <button class="path-btn">Comenzar ruta</button>
+        </div>
+        <div class="path-card">
+          <div class="path-badge">Ruta</div>
+          <h3>Desarrollo Backend</h3>
+          <p>Domina el desarrollo del lado del servidor</p>
+          <div class="path-info">
+            <span>15 cursos</span>
+            <span>•</span>
+            <span>100 horas</span>
+          </div>
+          <button class="path-btn">Comenzar ruta</button>
+        </div>
+        <div class="path-card">
+          <div class="path-badge">Ruta</div>
+          <h3>Diseño UX/UI</h3>
+          <p>Crea experiencias digitales increíbles</p>
+          <div class="path-info">
+            <span>10 cursos</span>
+            <span>•</span>
+            <span>60 horas</span>
+          </div>
+          <button class="path-btn">Comenzar ruta</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>¿Listo para transformar tu carrera?</h2>
+        <p>Únete a miles de estudiantes que ya están aprendiendo</p>
+        <button class="cta-btn">Explorar cursos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>MuckSena</h4>
+          <p>Educación de calidad para todos</p>
+        </div>
+        <div class="footer-col">
+          <h4>Plataforma</h4>
+          <a href="#">Cursos</a>
+          <a href="#">Rutas</a>
+          <a href="#">Certificados</a>
+        </div>
+        <div class="footer-col">
+          <h4>Comunidad</h4>
+          <a href="#">Blog</a>
+          <a href="#">Foro</a>
+          <a href="#">Eventos</a>
+        </div>
+        <div class="footer-col">
+          <h4>Soporte</h4>
+          <a href="#">Ayuda</a>
+          <a href="#">Contacto</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 MuckSena. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="./js/home.js"></script>
+</body>
+
+</html>
