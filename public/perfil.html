@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - MuckSena</title>
+  <link rel="stylesheet" href="./css/perfil.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="home.html" class="logo">MuckSena 🎓</a>
+      </div>
+      <div class="nav-right">
+        <a href="home.html" class="nav-link">Inicio</a>
+        <a href="mis-cursos.html" class="nav-link">Mis Cursos</a>
+        <div class="user-menu">
+          <span class="user-btn" id="userName">Usuario</span>
+          <div class="dropdown-menu">
+            <a href="perfil.html">Mi perfil</a>
+            <a href="#" id="logoutBtn">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="profile-container">
+    <!-- Sidebar -->
+    <aside class="profile-sidebar">
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">
+          <img src="" alt="Avatar" id="avatarImg">
+          <div class="avatar-overlay">
+            <label for="avatarUpload" class="avatar-upload-btn">
+              <span>📷</span>
+              <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+            </label>
+          </div>
+        </div>
+        <h2 id="sidebarUserName">Usuario</h2>
+        <p id="sidebarUserEmail">email@example.com</p>
+      </div>
+
+      <nav class="profile-nav">
+        <a href="#" class="nav-item active" data-section="perfil">
+          <span class="icon">👤</span>
+          <span>Mi Perfil</span>
+        </a>
+        <a href="#" class="nav-item" data-section="historial">
+          <span class="icon">🛒</span>
+          <span>Historial de Compras</span>
+        </a>
+        <a href="#" class="nav-item" data-section="metodos-pago">
+          <span class="icon">💳</span>
+          <span>Métodos de Pago</span>
+        </a>
+        <a href="#" class="nav-item" data-section="notificaciones">
+          <span class="icon">🔔</span>
+          <span>Notificaciones</span>
+        </a>
+        <a href="#" class="nav-item" data-section="mensajes">
+          <span class="icon">💬</span>
+          <span>Mensajes</span>
+        </a>
+        <a href="#" class="nav-item" data-section="lista-deseos">
+          <span class="icon">❤️</span>
+          <span>Lista de Deseos</span>
+        </a>
+        <a href="#" class="nav-item" data-section="configuracion">
+          <span class="icon">⚙️</span>
+          <span>Configuración</span>
+        </a>
+        <a href="#" class="nav-item" data-section="suscripciones">
+          <span class="icon">⭐</span>
+          <span>Suscripciones</span>
+        </a>
+        <a href="#" class="nav-item" data-section="creditos">
+          <span class="icon">🪙</span>
+          <span>Créditos</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="profile-content">
+      <!-- Sección: Mi Perfil -->
+      <section id="perfil" class="content-section active">
+        <h1>Mi Perfil</h1>
+        <div class="profile-card">
+          <div class="card-header">
+            <h3>Información Personal</h3>
+            <button class="btn-edit" id="editProfileBtn">Editar Perfil</button>
+          </div>
+          <div class="profile-info">
+            <div class="info-group">
+              <label>Nombre de Usuario</label>
+              <input type="text" id="profileUsername" disabled>
+            </div>
+            <div class="info-group">
+              <label>Correo Electrónico</label>
+              <input type="email" id="profileEmail" disabled>
+            </div>
+            <div class="info-group">
+              <label>Biografía</label>
+              <textarea id="profileBio" disabled placeholder="Cuéntanos sobre ti..."></textarea>
+            </div>
+            <div class="info-group">
+              <label>Sitio Web</label>
+              <input type="url" id="profileWebsite" disabled placeholder="https://...">
+            </div>
+          </div>
+          <div class="profile-actions" style="display: none;" id="profileActions">
+            <button class="btn-primary" id="saveProfileBtn">Guardar Cambios</button>
+            <button class="btn-secondary" id="cancelEditBtn">Cancelar</button>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <h3>Perfil Público</h3>
+          <p>Tu perfil público es visible para otros usuarios de la plataforma</p>
+          <div class="toggle-switch">
+            <input type="checkbox" id="publicProfile">
+            <label for="publicProfile">Hacer mi perfil público</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Historial de Compras -->
+      <section id="historial" class="content-section">
+        <h1>Historial de Compras</h1>
+        <div id="purchaseHistory" class="purchase-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Métodos de Pago -->
+      <section id="metodos-pago" class="content-section">
+        <h1>Métodos de Pago</h1>
+        <button class="btn-primary" id="addPaymentBtn">+ Agregar Método de Pago</button>
+        <div id="paymentMethods" class="payment-methods">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Notificaciones -->
+      <section id="notificaciones" class="content-section">
+        <h1>Notificaciones</h1>
+        <div class="notifications-settings">
+          <div class="setting-item">
+            <div>
+              <h4>Notificaciones por Email</h4>
+              <p>Recibe actualizaciones sobre tus cursos</p>
+            </div>
+            <input type="checkbox" id="emailNotif" checked>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Nuevos Cursos</h4>
+              <p>Notificaciones sobre nuevos cursos disponibles</p>
+            </div>
+            <input type="checkbox" id="newCoursesNotif" checked>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Promociones</h4>
+              <p>Ofertas especiales y descuentos</p>
+            </div>
+            <input type="checkbox" id="promoNotif">
+          </div>
+        </div>
+        <div id="notificationsList" class="notifications-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Mensajes -->
+      <section id="mensajes" class="content-section">
+        <h1>Mensajes</h1>
+        <div id="messagesList" class="messages-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Lista de Deseos -->
+      <section id="lista-deseos" class="content-section">
+        <h1>Lista de Deseos</h1>
+        <div id="wishlist" class="wishlist-grid">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Configuración -->
+      <section id="configuracion" class="content-section">
+        <h1>Configuración de la Cuenta</h1>
+        <div class="profile-card">
+          <h3>Cambiar Contraseña</h3>
+          <div class="info-group">
+            <label>Contraseña Actual</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="currentPassword">
+              <button type="button" class="toggle-password" data-target="currentPassword">👁️</button>
+            </div>
+          </div>
+          <div class="info-group">
+            <label>Nueva Contraseña</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="newPassword">
+              <button type="button" class="toggle-password" data-target="newPassword">👁️</button>
+            </div>
+          </div>
+          <div class="info-group">
+            <label>Confirmar Nueva Contraseña</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="confirmPassword">
+              <button type="button" class="toggle-password" data-target="confirmPassword">👁️</button>
+            </div>
+          </div>
+          <button class="btn-primary" id="changePasswordBtn">Cambiar Contraseña</button>
+        </div>
+
+        <div class="profile-card">
+          <h3>Privacidad</h3>
+          <div class="setting-item">
+            <div>
+              <h4>Mostrar mi progreso</h4>
+              <p>Permite que otros vean tu progreso en los cursos</p>
+            </div>
+            <input type="checkbox" id="showProgress">
+          </div>
+        </div>
+
+        <div class="profile-card danger-zone">
+          <h3>Zona de Peligro</h3>
+          <button class="btn-danger" id="deleteAccountBtn">Eliminar Cuenta</button>
+        </div>
+      </section>
+
+      <!-- Sección: Suscripciones -->
+      <section id="suscripciones" class="content-section">
+        <h1>Suscripciones</h1>
+        <div class="subscription-plans">
+          <div class="plan-card">
+            <h3>Plan Gratuito</h3>
+            <p class="price">$0 <span>/mes</span></p>
+            <ul>
+              <li>✓ Acceso a cursos gratuitos</li>
+              <li>✓ Certificados básicos</li>
+              <li>✗ Sin soporte prioritario</li>
+            </ul>
+            <button class="btn-secondary current-plan">Plan Actual</button>
+          </div>
+          <div class="plan-card featured">
+            <span class="badge">Popular</span>
+            <h3>Plan Premium</h3>
+            <p class="price">$29.99 <span>/mes</span></p>
+            <ul>
+              <li>✓ Acceso ilimitado a todos los cursos</li>
+              <li>✓ Certificados profesionales</li>
+              <li>✓ Soporte prioritario 24/7</li>
+              <li>✓ Descuentos exclusivos</li>
+            </ul>
+            <button class="btn-primary">Actualizar Plan</button>
+          </div>
+          <div class="plan-card">
+            <h3>Plan Empresarial</h3>
+            <p class="price">$99.99 <span>/mes</span></p>
+            <ul>
+              <li>✓ Todo lo del Plan Premium</li>
+              <li>✓ Hasta 10 usuarios</li>
+              <li>✓ Dashboard de equipo</li>
+              <li>✓ Reportes personalizados</li>
+            </ul>
+            <button class="btn-primary">Contactar Ventas</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Créditos -->
+      <section id="creditos" class="content-section">
+        <h1>Créditos MuckSena</h1>
+        <div class="credits-balance">
+          <div class="balance-card">
+            <h2>Balance Actual</h2>
+            <p class="balance-amount" id="creditsBalance">0</p>
+            <span>créditos</span>
+          </div>
+        </div>
+        <div class="credits-purchase">
+          <h3>Comprar Créditos</h3>
+          <div class="credits-options">
+            <div class="credit-option">
+              <h4>100 Créditos</h4>
+              <p class="price">$9.99</p>
+              <button class="btn-primary">Comprar</button>
+            </div>
+            <div class="credit-option">
+              <h4>500 Créditos</h4>
+              <p class="price">$39.99</p>
+              <span class="discount">Ahorra 20%</span>
+              <button class="btn-primary">Comprar</button>
+            </div>
+            <div class="credit-option">
+              <h4>1000 Créditos</h4>
+              <p class="price">$69.99</p>
+              <span class="discount">Ahorra 30%</span>
+              <button class="btn-primary">Comprar</button>
+            </div>
+          </div>
+        </div>
+        <div class="credits-history">
+          <h3>Historial de Créditos</h3>
+          <div id="creditsHistory">
+            <!-- Se carga dinámicamente -->
+          </div>
+          <p>Tu perfil público es visible para otros usuarios de la plataforma</p>
+          <div class="toggle-switch">
+            <input type="checkbox" id="publicProfile">
+            <label for="publicProfile">Hacer mi perfil público</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Historial de Compras -->
+      <section id="historial" class="content-section">
+        <h1>Historial de Compras</h1>
+        <div id="purchaseHistory" class="purchase-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Métodos de Pago -->
+      <section id="metodos-pago" class="content-section">
+        <h1>Métodos de Pago</h1>
+        <button class="btn-primary" id="addPaymentBtn">+ Agregar Método de Pago</button>
+        <div id="paymentMethods" class="payment-methods">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Notificaciones -->
+      <section id="notificaciones" class="content-section">
+        <h1>Notificaciones</h1>
+        <div class="notifications-settings">
+          <div class="setting-item">
+            <div>
+              <h4>Notificaciones por Email</h4>
+              <p>Recibe actualizaciones sobre tus cursos</p>
+            </div>
+            <input type="checkbox" id="emailNotif" checked>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Nuevos Cursos</h4>
+              <p>Notificaciones sobre nuevos cursos disponibles</p>
+            </div>
+            <input type="checkbox" id="newCoursesNotif" checked>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Promociones</h4>
+              <p>Ofertas especiales y descuentos</p>
+            </div>
+            <input type="checkbox" id="promoNotif">
+          </div>
+        </div>
+        <div id="notificationsList" class="notifications-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Mensajes -->
+      <section id="mensajes" class="content-section">
+        <h1>Mensajes</h1>
+        <div id="messagesList" class="messages-list">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Lista de Deseos -->
+      <section id="lista-deseos" class="content-section">
+        <h1>Lista de Deseos</h1>
+        <div id="wishlist" class="wishlist-grid">
+          <!-- Se carga dinámicamente -->
+        </div>
+      </section>
+
+      <!-- Sección: Configuración -->
+      <section id="configuracion" class="content-section">
+        <h1>Configuración de la Cuenta</h1>
+        <div class="profile-card">
+          <h3>Cambiar Contraseña</h3>
+          <div class="info-group">
+            <label>Contraseña Actual</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="currentPassword">
+              <button type="button" class="toggle-password" data-target="currentPassword">👁️</button>
+            </div>
+          </div>
+          <div class="info-group">
+            <label>Nueva Contraseña</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="newPassword">
+              <button type="button" class="toggle-password" data-target="newPassword">👁️</button>
+            </div>
+          </div>
+          <div class="info-group">
+            <label>Confirmar Nueva Contraseña</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="confirmPassword">
+              <button type="button" class="toggle-password" data-target="confirmPassword">👁️</button>
+            </div>
+          </div>
+          <button class="btn-primary" id="changePasswordBtn">Cambiar Contraseña</button>
+        </div>
+
+        <div class="profile-card">
+          <h3>Privacidad</h3>
+          <div class="setting-item">
+            <div>
+              <h4>Mostrar mi progreso</h4>
+              <p>Permite que otros vean tu progreso en los cursos</p>
+            </div>
+            <input type="checkbox" id="showProgress">
+          </div>
+        </div>
+
+        <div class="profile-card danger-zone">
+          <h3>Zona de Peligro</h3>
+          <button class="btn-danger" id="deleteAccountBtn">Eliminar Cuenta</button>
+        </div>
+      </section>
+
+      <!-- Sección: Suscripciones -->
+      <section id="suscripciones" class="content-section">
+        <h1>Suscripciones</h1>
+        <div class="subscription-plans">
+          <div class="plan-card">
+            <h3>Plan Gratuito</h3>
+            <p class="price">$0 <span>/mes</span></p>
+            <ul>
+              <li>✓ Acceso a cursos gratuitos</li>
+              <li>✓ Certificados básicos</li>
+              <li>✗ Sin soporte prioritario</li>
+            </ul>
+            <button class="btn-secondary current-plan">Plan Actual</button>
+          </div>
+          <div class="plan-card featured">
+            <span class="badge">Popular</span>
+            <h3>Plan Premium</h3>
+            <p class="price">$29.99 <span>/mes</span></p>
+            <ul>
+              <li>✓ Acceso ilimitado a todos los cursos</li>
+              <li>✓ Certificados profesionales</li>
+              <li>✓ Soporte prioritario 24/7</li>
+              <li>✓ Descuentos exclusivos</li>
+            </ul>
+            <button class="btn-primary">Actualizar Plan</button>
+          </div>
+          <div class="plan-card">
+            <h3>Plan Empresarial</h3>
+            <p class="price">$99.99 <span>/mes</span></p>
+            <ul>
+              <li>✓ Todo lo del Plan Premium</li>
+              <li>✓ Hasta 10 usuarios</li>
+              <li>✓ Dashboard de equipo</li>
+              <li>✓ Reportes personalizados</li>
+            </ul>
+            <button class="btn-primary">Contactar Ventas</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Créditos -->
+      <section id="creditos" class="content-section">
+        <h1>Créditos MuckSena</h1>
+        <div class="credits-balance">
+          <div class="balance-card">
+            <h2>Balance Actual</h2>
+            <p class="balance-amount" id="creditsBalance">0</p>
+            <span>créditos</span>
+          </div>
+        </div>
+        <div class="credits-purchase">
+          <h3>Comprar Créditos</h3>
+          <div class="credits-options">
+            <div class="credit-option">
+              <h4>100 Créditos</h4>
+              <p class="price">$9.99</p>
+              <button class="btn-primary">Comprar</button>
+            </div>
+            <div class="credit-option">
+              <h4>500 Créditos</h4>
+              <p class="price">$39.99</p>
+              <span class="discount">Ahorra 20%</span>
+              <button class="btn-primary">Comprar</button>
+            </div>
+            <div class="credit-option">
+              <h4>1000 Créditos</h4>
+              <p class="price">$69.99</p>
+              <span class="discount">Ahorra 30%</span>
+              <button class="btn-primary">Comprar</button>
+            </div>
+          </div>
+        </div>
+        <div class="credits-history">
+          <h3>Historial de Créditos</h3>
+          <div id="creditsHistory">
+            <!-- Se carga dinámicamente -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+
+</html>

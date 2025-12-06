@@ -1,0 +1,329 @@
+=== HOJA 1: DATOS GENERALES ===
+
+Programa de formación: Análisis y desarrollo de software
+Proyecto formativo: Construcción de software integrador de tecnologías orientadas a servicios
+Fase proyecto: Ejecución
+Resultado de aprendizaje: 220501096-05 Realizar pruebas al software para verificar su funcionalidad
+Actividad de aprendizaje: GA9-220501096-AA1- Realizar plan de pruebas
+Evidencia de desempeño: Realiza plan pruebas de software - GA9-220501096-AA1-EV02
+Nombre del proyecto: MuckSena - Plataforma de Cursos en Línea
+Versión: 1.0
+Fecha: Noviembre 2024
+Responsable: [Tu nombre]
+
+=== HOJA 2: REQUERIMIENTOS FUNCIONALES ===
+
+RF-01 | Autenticación de Usuarios
+- Login con email y contraseña
+- Autenticación OAuth con Google
+- Registro de nuevos usuarios
+- Recuperación de contraseña
+- Cierre de sesión
+
+RF-02 | Gestión de Perfil
+- Visualización de datos personales
+- Edición de perfil (nombre, biografía, sitio web)
+- Cambio de contraseña
+- Carga y actualización de avatar
+- Visualización de perfil público
+
+RF-03 | Catálogo de Cursos
+- Listado de cursos disponibles
+- Búsqueda de cursos
+- Filtrado por categorías
+- Visualización de detalles del curso
+
+RF-04 | Compra de Cursos
+- Agregar curso al carrito
+- Proceso de compra
+- Historial de compras
+- Persistencia en MongoDB
+
+RF-05 | Mis Cursos
+- Listado de cursos comprados
+- Seguimiento de progreso
+- Filtrado de cursos
+- Búsqueda en mis cursos
+
+RF-06 | Gestión de Datos
+- Almacenamiento en MongoDB
+- Sincronización con localStorage
+- Persistencia de sesión
+- Gestión de tokens JWT
+
+=== HOJA 3: REQUERIMIENTOS NO FUNCIONALES (ISO 25000) ===
+
+RNF-01 | Seguridad
+- Encriptación de contraseñas (bcrypt)
+- Tokens JWT para autenticación
+- Validación de datos de entrada
+- Protección CORS
+
+RNF-02 | Rendimiento
+- Tiempo de respuesta < 2 segundos
+- Optimización de imágenes
+- Carga eficiente de datos
+
+RNF-03 | Usabilidad
+- Interfaz intuitiva y moderna
+- Diseño responsive
+- Feedback visual al usuario
+- Mensajes de error claros
+
+RNF-04 | Compatibilidad
+- Navegadores: Chrome, Firefox, Edge
+- Dispositivos móviles y desktop
+- API REST estándar
+
+RNF-05 | Fiabilidad
+- Sistema funciona sin fallos frecuentes
+- Manejo de errores de red/servidor
+- Recuperación de sesión tras error
+
+RNF-06 | Mantenibilidad
+- Código modular y organizado
+- Funciones reutilizables
+- Código legible y documentado
+
+=== HOJA 4: CASOS DE PRUEBA - AUTENTICACIÓN ===
+
+CP-AUTH-001 | Registro de Usuario Exitoso
+Objetivo: Verificar registro con datos válidos
+Precondiciones: Usuario no existe en BD
+Datos entrada: username="testuser", email="test@example.com", password="Test123"
+Pasos: 1.Abrir modal registro 2.Ingresar datos 3.Click "Crear cuenta"
+Resultado esperado: Usuario creado, mensaje de éxito, status 200
+ISO 25000: Funcionalidad, Seguridad
+Prioridad: Alta
+
+CP-AUTH-002 | Login Exitoso
+Objetivo: Verificar login con credenciales válidas
+Precondiciones: Usuario existe en BD
+Datos entrada: email="test@example.com", password="Test123"
+Pasos: 1.Ingresar email y contraseña 2.Click "Iniciar sesión"
+Resultado esperado: Redirección a home.html, token JWT generado
+ISO 25000: Funcionalidad, Seguridad
+Prioridad: Alta
+
+CP-AUTH-003 | Login con Contraseña Incorrecta
+Objetivo: Verificar manejo de error
+Datos entrada: email="test@example.com", password="WrongPass"
+Resultado esperado: Mensaje "Contraseña incorrecta", status 400
+ISO 25000: Fiabilidad, Seguridad
+Prioridad: Alta
+
+CP-AUTH-004 | OAuth Google
+Objetivo: Verificar autenticación con Google
+Pasos: 1.Click botón Google 2.Autorizar en Google
+Resultado esperado: Usuario autenticado, redirección a home
+ISO 25000: Funcionalidad, Seguridad
+Prioridad: Media
+
+CP-AUTH-005 | Recuperación de Contraseña
+Objetivo: Verificar envío de email de recuperación
+Datos entrada: email="test@example.com"
+Resultado esperado: Email enviado con token
+ISO 25000: Funcionalidad
+Prioridad: Media
+
+=== HOJA 5: CASOS DE PRUEBA - PERFIL ===
+
+CP-PERFIL-001 | Editar Perfil
+Objetivo: Actualizar datos personales
+Precondiciones: Usuario autenticado
+Datos entrada: username="newname", bio="Mi biografía", website="https://example.com"
+Resultado esperado: Datos actualizados en MongoDB, status 200
+ISO 25000: Funcionalidad
+Prioridad: Media
+
+CP-PERFIL-002 | Cambiar Avatar
+Objetivo: Subir imagen de perfil
+Datos entrada: Imagen JPG < 5MB
+Resultado esperado: Avatar actualizado, imagen optimizada a 400x400
+ISO 25000: Funcionalidad, Eficiencia
+Prioridad: Media
+
+CP-PERFIL-003 | Cambiar Contraseña
+Objetivo: Actualizar contraseña
+Datos entrada: currentPassword="Test123", newPassword="NewPass456"
+Resultado esperado: Contraseña actualizada, hash bcrypt en BD
+ISO 25000: Seguridad
+Prioridad: Alta
+
+=== HOJA 6: CASOS DE PRUEBA - CURSOS ===
+
+CP-CURSOS-001 | Listar Cursos
+Objetivo: Mostrar catálogo de cursos
+Resultado esperado: Grid con cursos, imágenes cargadas, tiempo < 2seg
+ISO 25000: Funcionalidad, Usabilidad
+Prioridad: Alta
+
+CP-CURSOS-002 | Buscar Curso
+Objetivo: Filtrar cursos por texto
+Datos entrada: "JavaScript"
+Resultado esperado: Cursos relacionados con JavaScript
+ISO 25000: Funcionalidad
+Prioridad: Media
+
+CP-CURSOS-003 | Comprar Curso
+Objetivo: Agregar curso a mis cursos
+Precondiciones: Usuario autenticado
+Resultado esperado: Curso en purchasedCourses en MongoDB
+ISO 25000: Funcionalidad
+Prioridad: Alta
+
+CP-CURSOS-004 | Ver Mis Cursos
+Objetivo: Listar cursos comprados
+Resultado esperado: Cursos del usuario con progreso
+ISO 25000: Funcionalidad
+Prioridad: Alta
+
+=== HOJA 7: CASOS DE PRUEBA - SEGURIDAD ===
+
+CP-SEC-001 | Validación de Token JWT
+Objetivo: Verificar protección de rutas
+Pasos: Acceder a /api/profile/me sin token
+Resultado esperado: Error 401 Unauthorized
+ISO 25000: Seguridad
+Prioridad: Alta
+
+CP-SEC-002 | Encriptación de Contraseñas
+Objetivo: Verificar que contraseñas no se guardan en texto plano
+Resultado esperado: Hash bcrypt en MongoDB
+ISO 25000: Seguridad
+Prioridad: Alta
+
+CP-SEC-003 | Protección CORS
+Objetivo: Verificar configuración CORS
+Resultado esperado: Solo orígenes permitidos pueden acceder
+ISO 25000: Seguridad
+Prioridad: Alta
+
+CP-SEC-004 | Inyección SQL
+Objetivo: Verificar protección contra inyección SQL
+Datos entrada: email="admin' OR '1'='1", password="' OR '1'='1"
+Resultado esperado: Login fallido, sin acceso
+ISO 25000: Seguridad
+Prioridad: Alta
+
+CP-SEC-005 | XSS (Cross-Site Scripting)
+Objetivo: Verificar sanitización de datos
+Datos entrada: username="<script>alert('XSS')</script>"
+Resultado esperado: Datos escapados, sin ejecución de scripts
+ISO 25000: Seguridad
+Prioridad: Alta
+
+=== HOJA 8: CASOS DE PRUEBA - RENDIMIENTO ===
+
+CP-PERF-001 | Tiempo de Carga Inicial
+Objetivo: Medir tiempo de carga de home
+Métrica: < 2 segundos
+ISO 25000: Eficiencia
+Prioridad: Media
+
+CP-PERF-002 | Optimización de Imágenes
+Objetivo: Verificar compresión de avatares
+Resultado esperado: Imágenes < 100KB
+ISO 25000: Eficiencia
+Prioridad: Baja
+
+CP-PERF-003 | Respuesta de API
+Objetivo: Medir tiempo de respuesta de endpoints
+Métrica: < 500ms para operaciones simples
+ISO 25000: Eficiencia
+Prioridad: Media
+
+=== HOJA 9: MATRIZ DE TRAZABILIDAD ===
+
+Requerimiento | Caso de Prueba | Estado
+RF-01 | CP-AUTH-001, CP-AUTH-002, CP-AUTH-003, CP-AUTH-004, CP-AUTH-005 | Pendiente
+RF-02 | CP-PERFIL-001, CP-PERFIL-002, CP-PERFIL-003 | Pendiente
+RF-03 | CP-CURSOS-001, CP-CURSOS-002 | Pendiente
+RF-04 | CP-CURSOS-003 | Pendiente
+RF-05 | CP-CURSOS-004 | Pendiente
+RNF-01 | CP-SEC-001, CP-SEC-002, CP-SEC-003, CP-SEC-004, CP-SEC-005 | Pendiente
+RNF-02 | CP-PERF-001, CP-PERF-002, CP-PERF-003 | Pendiente
+
+=== HOJA 10: CRONOGRAMA ===
+
+Fase | Actividad | Duración | Responsable | Fecha Inicio | Fecha Fin
+1 | Preparación de entorno | 1 día | Desarrollador | [Fecha] | [Fecha]
+2 | Pruebas de Autenticación | 2 días | QA | [Fecha] | [Fecha]
+3 | Pruebas de Perfil | 1 día | QA | [Fecha] | [Fecha]
+4 | Pruebas de Cursos | 2 días | QA | [Fecha] | [Fecha]
+5 | Pruebas de Seguridad | 2 días | QA | [Fecha] | [Fecha]
+6 | Pruebas de Rendimiento | 1 día | QA | [Fecha] | [Fecha]
+7 | Documentación de resultados | 1 día | QA | [Fecha] | [Fecha]
+Total | | 10 días | | | 
+
+=== HOJA 11: ENTORNO DE PRUEBAS ===
+
+Componente | Descripción | Versión/URL
+Sistema Operativo | Windows | 10/11
+Navegador Principal | Google Chrome | Última versión
+Navegador Secundario | Firefox | Última versión
+Backend | Node.js + Express | v18+
+Base de Datos | MongoDB Atlas | Cloud
+Frontend | HTML5, CSS3, JavaScript | ES6+
+Servidor Local | Live Server | http://127.0.0.1:5501
+API Backend | Express Server | http://localhost:3000
+Herramienta API | Insomnia | Última versión
+
+=== HOJA 12: CRITERIOS DE ACEPTACIÓN ===
+
+Criterio | Descripción | Valor Esperado
+Cobertura de Pruebas | Porcentaje de casos ejecutados | 100%
+Casos Exitosos | Porcentaje de casos pasados | ≥ 95%
+Defectos Críticos | Número de defectos críticos | 0
+Defectos Altos | Número de defectos altos | ≤ 2
+Tiempo de Respuesta | Promedio de respuesta API | < 2 seg
+Seguridad | Vulnerabilidades críticas | 0
+Usabilidad | Satisfacción del usuario | ≥ 4/5
+
+=== HOJA 13: RIESGOS Y CONTINGENCIAS ===
+
+ID | Riesgo | Probabilidad | Impacto | Mitigación | Contingencia
+R-01 | Fallo en conexión MongoDB | Media | Alto | Implementar reintentos automáticos | Usar localStorage temporal
+R-02 | Token JWT expirado | Alta | Medio | Refresh token automático | Re-login del usuario
+R-03 | Imágenes muy grandes | Media | Medio | Validación y compresión | Rechazar imágenes > 5MB
+R-04 | Error en OAuth Google | Baja | Alto | Fallback a login tradicional | Mostrar mensaje alternativo
+R-05 | Pérdida de sesión | Media | Medio | Persistencia en localStorage | Recuperación automática
+R-06 | Incompatibilidad navegador | Baja | Medio | Pruebas en múltiples navegadores | Mensaje de navegador no soportado
+
+=== HOJA 14: RESULTADOS DE EJECUCIÓN ===
+
+(Esta hoja se llena después de ejecutar las pruebas)
+
+Caso de Prueba | Fecha Ejecución | Ejecutado Por | Resultado | Tiempo | Observaciones | Defecto ID
+CP-AUTH-001 | | | | | | 
+CP-AUTH-002 | | | | | | 
+CP-AUTH-003 | | | | | | 
+(etc...)
+
+Leyenda Resultados:
+✅ PASS - Prueba exitosa
+❌ FAIL - Prueba fallida
+⚠️ BLOCKED - Prueba bloqueada
+⏭️ SKIP - Prueba omitida
+
+=== HOJA 15: DEFECTOS ENCONTRADOS ===
+
+(Esta hoja se llena si se encuentran defectos)
+
+ID | Título | Descripción | Severidad | Prioridad | Estado | Caso Prueba | Fecha | Asignado
+DEF-001 | | | | | | | | 
+
+Severidad: Crítica, Alta, Media, Baja
+Prioridad: Urgente, Alta, Media, Baja
+Estado: Abierto, En Progreso, Resuelto, Cerrado
+
+=== INSTRUCCIONES DE USO ===
+
+1. Copia cada sección a la hoja correspondiente de tu Excel
+2. Completa los campos marcados con [Fecha] o [Tu nombre]
+3. Ejecuta las pruebas usando Insomnia (ver colección JSON)
+4. Registra los resultados en la Hoja 14
+5. Si encuentras defectos, regístralos en la Hoja 15
+6. Calcula el porcentaje de éxito: (Casos PASS / Total Casos) * 100
+7. Verifica que cumples los criterios de aceptación
+8. Genera el reporte final con evidencias (capturas de pantalla)

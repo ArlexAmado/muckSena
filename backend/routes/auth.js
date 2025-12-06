@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
     // Buscar todos los usuarios para debug
     const allUsers = await User.find({});
     console.log('Usuarios en la base de datos:', allUsers.map(u => ({ email: u.email, username: u.username })));
-    
+
     const user = await User.findOne({ email });
     console.log('Usuario encontrado:', user ? 'Sí' : 'No');
     if (user) {
@@ -54,9 +54,9 @@ router.post('/login', async (req, res) => {
 
     // Generar JWT real para el usuario
     const token = jwt.sign(
-      { 
+      {
         userId: user._id,
-        email: user.email 
+        email: user.email
       },
       JWT_SECRET,
       { expiresIn: '2h' }
@@ -116,7 +116,11 @@ router.post('/forgot-password', async (req, res) => {
     }
 
     // Enlace de recuperación (ajusta la URL a tu frontend). Se puede configurar con FRONTEND_URL en .env
-    const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5500';
+    // Enlace de recuperación
+    // NOTA: Si pruebas localmente con Live Server desde la raíz, y el archivo está en public/, 
+    // asegura que FRONTEND_URL apunte a http://127.0.0.1:5501/public o ajusta tu entorno.
+    // Para producción (Render static site), será la raíz.
+    const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501/public';
     const resetUrl = `${frontendUrl}/reset-password.html?token=${token}`;
 
     // Envía el correo
@@ -166,8 +170,8 @@ router.post('/reset-password', async (req, res) => {
 });
 
 // Ruta 1: Iniciar login con Google
-router.get('/auth/google', 
-  passport.authenticate('google', { 
+router.get('/auth/google',
+  passport.authenticate('google', {
     scope: ['profile', 'email'],
     prompt: 'select_account' // Esto fuerza a mostrar el selector de cuentas
   })
@@ -175,33 +179,33 @@ router.get('/auth/google',
 
 // Ruta 2: Callback de Google (donde Google redirige después del login)
 router.get('/auth/google/callback',
-  passport.authenticate('google', { 
-    session: false, 
+  passport.authenticate('google', {
+    session: false,
     failureRedirect: '/login?error=google_auth_failed'
   }),
   (req, res) => {
     // Generar JWT para el usuario
     const token = jwt.sign(
-      { 
+      {
         userId: req.user._id,
-        email: req.user.email 
+        email: req.user.email
       },
       JWT_SECRET,
       { expiresIn: '2h' }
     );
-    
- /*    // URL del frontend (usando Live Server)
-    const frontendUrl = 'http://127.0.0.1:5500';
-    
-    // Redirigir al dashboard con el token (archivo en la raíz)
-    res.redirect(`${frontendUrl}/dashboard.html?token=${token}`);
-  } */
+
+    /*    // URL del frontend (usando Live Server)
+       const frontendUrl = 'http://127.0.0.1:5500';
+       
+       // Redirigir al dashboard con el token (archivo en la raíz)
+       res.redirect(`${frontendUrl}/dashboard.html?token=${token}`);
+     } */
 
     // Usa la URL definida en .env o por defecto el 5501
-      const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501';
-      res.redirect(`${frontendUrl}/home.html?token=${token}`);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501';
+    res.redirect(`${frontendUrl}/home.html?token=${token}`);
   }
 
-  );
+);
 
 module.exports = router;

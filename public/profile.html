@@ -1,0 +1,133 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[readonly] {
+      background-color: #f9f9f9;
+    }
+
+    .nav-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .nav-link a {
+      color: #0077cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Perfil del Usuario</h1>
+    <form id="profileForm">
+
+      <label>Correo:</label>
+      <input type="email" id="profileEmail" readonly />
+
+      <label>Usuario:</label>
+      <input type="text" id="profileUsername" readonly />
+
+      <label>Nueva Contraseña:</label>
+      <div class="password-group">
+        <input type="password" id="newPassword" placeholder="Dejar en blanco si no desea cambiar" />
+        <button type="button" id="togglePassword" class="toggle-password-btn">👁️</button>
+      </div>
+      <button type="submit" class="save-btn">Guardar Cambios</button>
+
+    </form>
+    <!-- profile.html -->
+    <!DOCTYPE html>
+    <html lang="es">
+
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Perfil de Usuario</title>
+      <link rel="stylesheet" href="css/styles.css" />
+      <style>
+        .container {
+          max-width: 500px;
+          margin: 40px auto;
+          padding: 20px;
+          background-color: white;
+          border-radius: 12px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+          display: block;
+          margin-top: 10px;
+        }
+
+        input[readonly] {
+          background-color: #f9f9f9;
+        }
+
+        .nav-link {
+          display: block;
+          margin-top: 20px;
+          text-align: center;
+        }
+
+        .nav-link a {
+          color: #0077cc;
+          text-decoration: none;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="container">
+        <h1>Perfil del Usuario</h1>
+        <form id="profileForm">
+
+          <label>Correo:</label>
+          <input type="email" id="profileEmail" readonly />
+
+          <label>Usuario:</label>
+          <input type="text" id="profileUsername" readonly />
+
+          <label>Nueva Contraseña:</label>
+          <div class="password-group">
+            <input type="password" id="newPassword" placeholder="Dejar en blanco si no desea cambiar" />
+            <button type="button" id="togglePassword" class="toggle-password-btn">👁️</button>
+          </div>
+          <button type="submit" class="save-btn">Guardar Cambios</button>
+
+        </form>
+
+        <div class="nav-link">
+          <a href="dashboard.html">← Volver al Dashboard</a>
+        </div>
+      </div>
+
+      <script src="js/config.js"></script>
+      <script src="js/profile.js"></script>
+    </body>
+
+    </html>

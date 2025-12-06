@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursos en Línea</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+</head>
+
+<body>
+  <!-- Modal de login tipo split -->
+  <div id="login-container">
+    <div class="split-modal">
+      <div class="split-modal-left">
+        <img src="images/login/login.webp" alt="Ilustración" />
+      </div>
+      <div class="split-modal-right">
+        <form id="loginForm" autocomplete="off">
+          <h2>Inicia sesión para continuar tu experiencia de aprendizaje</h2>
+          <input type="email" id="usernameInput" placeholder="Correo electrónico" required autocomplete="off">
+
+
+
+          <!-- Mostrar contraseña login -->
+          <div class="password-group">
+            <input type="password" id="passwordLogin" placeholder="Contraseña" required autocomplete="off" />
+            <button type="button" id="toggleLoginPassword" class="toggle-password-btn">👁️</button>
+          </div>
+
+          <!-- <input type="password" id="passwordInput" placeholder="Contraseña" required autocomplete="off"> -->
+          <button type="submit" class="ver-curso-btn">
+            Iniciar sesión
+          </button>
+
+          <div class="login-links">
+            <span><a href="#" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a></span>
+          </div>
+
+          <div class="divider">Otras opciones de inicio de sesión</div>
+          <div class="social-login">
+
+            <button id="googleLoginBtn" class="btn google">
+              <img src="images/login/G.png" alt="">
+            </button> <!-- //Botón de Google personalizado -->
+
+            <button id="facebookLoginBtn" class="social-btn facebook">
+              <img src="images/login/F.png" alt="">
+            </button>
+
+            <button id="AppleLoginBtn" class="social-btn apple">
+              <img src="images/login/A.png" alt="">
+            </button>
+          </div>
+          <div class="login-links">
+            <span>¿No tienes una cuenta? <a href="#" id="registerBtn">Regístrate</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de recuperación de contraseña -->
+  <div id="forgotPasswordModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Recuperar contraseña</h2>
+      <form id="forgotPasswordForm">
+        <input type="email" id="forgotPasswordEmail" placeholder="Tu correo electrónico" required>
+        <button type="submit" class="recovery-btn">Enviar enlace</button>
+        <button type="button" id="closeForgotPassword" class="recovery-cancel-btn">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de registro tipo split -->
+  <div id="register-container">
+    <div class="split-modal">
+      <div class="split-modal-left">
+        <img src="images/login/login.webp" alt="Ilustración" />
+      </div>
+      <div class="split-modal-right">
+        <form id="registerForm" autocomplete="off">
+          <h2>Registrarse</h2>
+          <input type="text" id="registerUsername" placeholder="Usuario" required autocomplete="off">
+          <input type="email" id="registerEmail" placeholder="Correo electrónico" required autocomplete="off">
+
+          <div class="password-group">
+            <input type="password" id="registerPassword" placeholder="Contraseña" required autocomplete="off">
+            <button type="button" id="toggleRegisterPassword" class="toggle-password-btn">👁️</button>
+          </div>
+
+          <!-- <input type="password" id="registerPassword" placeholder="Contraseña" required> -->
+          <button type="submit" class="ver-curso-btn">Crear cuenta</button>
+          <div class="login-links">
+            <span>¿Ya tienes cuenta? <a href="#" id="loginBtnFromRegister">Inicia sesión</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard siempre visible -->
+  <div id="dashboard-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="logo">MuckSena </div>
+        <!-- <div class="dropdown">
+          <button class="dropdown-btn">Categorías</button>
+          <div class="dropdown-content">
+            <a href="#" data-category="Programación">Programación</a>
+            <a href="#" data-category="Diseño">Diseño</a>
+            <a href="#" data-category="Marketing">Marketing</a>
+            <a href="#" data-category="Negocios">Negocios</a>
+          </div>
+        </div> -->
+      </div>
+      <!-- <div class="nav-right">
+        <div class="socials">
+          <span>🦩</span>
+          <span>💼</span>
+        </div> -->
+      <div class="user-info">
+        <button class="user-btn" id="username">Comenzar ahora</button>
+      </div>
+  </div>
+  </header>
+
+  <main>
+    <section class="hero-landing">
+      <div class="hero-content">
+        <h1>Nunca pares de aprender</h1>
+
+
+
+        <p>Desarrolla las habilidades que necesitas para impulsar tu carrera profesional</p>
+
+        <!-- Pasarela de Tecnologías -->
+        <section class="tech-brands">
+          <div class="tech-container">
+            <!--       <p class="tech-subtitle">Aprende las tecnologías más demandadas</p> -->
+            <div class="tech-slider">
+              <div class="tech-track">
+                <!-- Primera serie de logos -->
+                <div class="tech-logo" data-tech="JavaScript">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                    alt="JavaScript">
+                </div>
+                <div class="tech-logo" data-tech="Python">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                </div>
+                <div class="tech-logo" data-tech="React">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                </div>
+                <div class="tech-logo" data-tech="Node.js">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                    alt="Node.js">
+                </div>
+                <div class="tech-logo" data-tech="MongoDB">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                    alt="MongoDB">
+                </div>
+                <div class="tech-logo" data-tech="Docker">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                </div>
+                <div class="tech-logo" data-tech="Git">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                </div>
+                <div class="tech-logo" data-tech="TypeScript">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                    alt="TypeScript">
+                </div>
+                <div class="tech-logo" data-tech="Vue.js">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js">
+                </div>
+                <div class="tech-logo" data-tech="Angular">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
+                    alt="Angular">
+                </div>
+                <div class="tech-logo" data-tech="Java">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                </div>
+                <div class="tech-logo" data-tech="PHP">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                </div>
+
+                <!-- Duplicado para animación infinita -->
+                <div class="tech-logo" data-tech="JavaScript">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                    alt="JavaScript">
+                </div>
+                <div class="tech-logo" data-tech="Python">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                </div>
+                <div class="tech-logo" data-tech="React">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                </div>
+                <div class="tech-logo" data-tech="Node.js">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                    alt="Node.js">
+                </div>
+                <div class="tech-logo" data-tech="MongoDB">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                    alt="MongoDB">
+                </div>
+                <div class="tech-logo" data-tech="Docker">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                </div>
+                <div class="tech-logo" data-tech="Git">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                </div>
+                <div class="tech-logo" data-tech="TypeScript">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                    alt="TypeScript">
+                </div>
+                <div class="tech-logo" data-tech="Vue.js">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js">
+                </div>
+                <div class="tech-logo" data-tech="Angular">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg"
+                    alt="Angular">
+                </div>
+                <div class="tech-logo" data-tech="Java">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                </div>
+                <div class="tech-logo" data-tech="PHP">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- <div class="hero-buttons">
+            <button class="btn-primary" id="heroLoginBtn">Comenzar ahora</button>
+            <button class="btn-secondary" id="heroRegisterBtn">Crear cuenta gratis</button>
+          </div> -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>+500</h3>
+            <p>Cursos disponibles</p>
+          </div>
+          <div class="stat-item">
+            <h3>+50K</h3>
+            <p>Estudiantes activos</p>
+          </div>
+          <div class="stat-item">
+            <h3>+100</h3>
+            <p>Profesores expertos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+
+
+
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/curso-dashboard.js"></script>
+</body>
+
+</html>

@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
   password: String,  // Opcional para usuarios de OAuth
   googleId: String,  // ID único de Google
   avatar: String,    // URL del avatar (puede venir de Google)
+  bio: String,       // Biografía del usuario
+  website: String,   // Sitio web del usuario
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   purchasedCourses: [{

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('resetPasswordForm');
   const messageDiv = document.getElementById('resetMessage');
 
@@ -12,13 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const newPassword = document.getElementById('newPassword').value;
 
     try {
       // Apuntar al backend (puerto 3000) en lugar del servidor estático del frontend
-      const res = await fetch('http://localhost:3000/api/reset-password', {
+      // Apuntar al backend (puerto 3000) usando API_URL
+      const res = await fetch(`${API_URL}/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, newPassword })

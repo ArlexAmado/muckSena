@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Obtener datos del perfil desde el backend
   try {
-    const res = await fetch("http://localhost:3000/api/perfil", {
+    const res = await fetch(`${API_URL}/perfil`, {
       headers: {
         "Authorization": "Bearer " + session.token
       }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/cambiar-password", {
+        const res = await fetch(`${API_URL}/cambiar-password`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -72,4 +72,3 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
- 
