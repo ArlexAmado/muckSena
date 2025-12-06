@@ -139,9 +139,8 @@ function loadUserInfo() {
       avatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(session.username)}&background=98ca3f&color=fff`;
     }
   } else {
-    // Si no hay sesión, redirigir al login
-    window.location.href = 'home.html';
-    /*  window.location.href = 'dashboard.html'; */
+    // Si no hay sesión, redirigir al login (index.html, que ahora tiene el contenido del dashboard)
+    window.location.href = 'index.html';
   }
 }
 
@@ -264,7 +263,7 @@ function setupEventListeners() {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       localStorage.removeItem('session');
-      window.location.href = 'dashboard.html';
+      window.location.href = 'index.html';
     });
   }
 

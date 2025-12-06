@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const path = require('path');
 const session = require('express-session');
 const passport = require('../backend/passport');
 const User = require('../backend/models/User');
@@ -43,7 +44,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  
+
   // Manejar las solicitudes OPTIONS
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -59,12 +60,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// ========== ARCHIVOS ESTÁTICOS (FRONTEND) ==========
+app.use(express.static(path.join(__dirname, '../public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 // ========== CONFIGURACIÓN SESSION & PASSPORT ==========
 app.use(session({
   secret: process.env.SESSION_SECRET || 'dev_secret_key',
   resave: false,
   saveUninitialized: false,
-  cookie: { 
+  cookie: {
     secure: process.env.NODE_ENV === 'production',
     maxAge: 24 * 60 * 60 * 1000 // 24 horas
   }

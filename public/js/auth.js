@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isLoggedIn()) {
         localStorage.removeItem('session');
         updateUserUI();
-        window.location.href = 'dashboard.html';
+        window.location.href = 'index.html';
       } else {
         showLoginModal();
       }
