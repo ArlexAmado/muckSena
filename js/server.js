@@ -128,59 +128,18 @@ const profileRoutes = require('../backend/routes/profile');
 app.use('/api/profile', profileRoutes);
 
 // ========== RUTAS DE LA API ==========
-app.post('/api/register', async (req, res) => {
-  const { username, email, password } = req.body;
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ message: 'Correo electrónico inválido' });
-  }
-
-  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
-  if (!passwordRegex.test(password)) {
-    return res.status(400).json({ message: 'La contraseña debe tener al menos 6 caracteres, incluyendo una letra y un número' });
-  }
-
-  try {
-    const exists = await User.findOne({ email });
-    if (exists) return res.status(400).json({ message: 'El usuario ya existe' });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, email, password: hashedPassword });
-    await user.save();
-    res.json({ message: 'Usuario registrado exitosamente' });
-  } catch (error) {
-    console.error('Error al registrar:', error);
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
+// ========== HEALTH CHECK ==========
+app.get('/api/health', (req, res) => {
+  const mongoState = mongoose.connection.readyState;
+  const states = { 0: 'disconnected', 1: 'connected', 2: 'connecting', 3: 'disconnecting' };
+  res.json({
+    status: 'ok',
+    mongo_status: states[mongoState] || 'unknown',
+    env: process.env.NODE_ENV
+  });
 });
 
-app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: 'Credenciales inválidas' });
 
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) return res.status(401).json({ message: 'Credenciales inválidas' });
-
-    const token = jwt.sign({ userId: user._id, email: user.email }, JWT_SECRET, { expiresIn: '2h' });
-    res.json({ username: user.username, email: user.email, token });
-  } catch (error) {
-    console.error('Error en login:', error);
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
-});
-
-app.get('/api/perfil', authMiddleware, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.userId);
-    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
-    res.json({ username: user.username, email: user.email });
-  } catch (error) {
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
-});
 
 // ========== INICIAR SERVIDOR ==========
 const PORT = process.env.PORT || 3000;
