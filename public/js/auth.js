@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginBtnFromRegister = document.getElementById('loginBtnFromRegister');
   const loginContainer = document.getElementById('login-container');
   const registerContainer = document.getElementById('register-container');
-  
+
   // Botones del hero
   const heroLoginBtn = document.getElementById('heroLoginBtn');
   const heroRegisterBtn = document.getElementById('heroRegisterBtn');
@@ -30,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateUserUI() {
     if (usernameSpan) {
       const username = getUsername();
-      
+
       // Cambiar estilo del botón si está logueado
       if (isLoggedIn()) {
         // Agregar clase para usuario logueado
         usernameSpan.classList.add('user-logged-in');
-        
+
         // Solo mostrar el nombre
         usernameSpan.textContent = username;
       } else {
@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Eventos de botones
-  
+
   // Botón principal "Comenzar ahora" / nombre de usuario
   if (usernameSpan) {
-    usernameSpan.addEventListener('click', function(e) {
+    usernameSpan.addEventListener('click', function (e) {
       e.preventDefault();
       if (isLoggedIn()) {
         // Si está logueado, redirigir a home
@@ -87,9 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
+
   if (loginLogoutBtn) {
-    loginLogoutBtn.addEventListener('click', function(e) {
+    loginLogoutBtn.addEventListener('click', function (e) {
       e.preventDefault();
       if (isLoggedIn()) {
         localStorage.removeItem('session');
@@ -101,19 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   if (registerBtn) {
-    registerBtn.addEventListener('click', function(e) {
+    registerBtn.addEventListener('click', function (e) {
       e.preventDefault();
       showRegisterModal();
     });
   }
   if (registerBtnDropdown) {
-    registerBtnDropdown.addEventListener('click', function(e) {
+    registerBtnDropdown.addEventListener('click', function (e) {
       e.preventDefault();
       showRegisterModal();
     });
   }
   if (loginBtnFromRegister) {
-    loginBtnFromRegister.addEventListener('click', function(e) {
+    loginBtnFromRegister.addEventListener('click', function (e) {
       e.preventDefault();
       showLoginModal();
     });
@@ -121,13 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Registro con backend
   if (registerForm) {
-    registerForm.addEventListener('submit', async function(e) {
+    registerForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const username = document.getElementById('registerUsername').value;
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
 
-      const res = await fetch('http://localhost:3000/api/register', {
+      const res = await fetch(`${API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
@@ -145,12 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Login con backend
   if (loginForm) {
-    loginForm.addEventListener('submit', async function(e) {
+    loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const email = document.getElementById('usernameInput').value;
       const password = document.getElementById('passwordLogin').value;
 
-      const res = await fetch('http://localhost:3000/api/login', {
+      const res = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUserUI();
         hideLoginModal();
         loginForm.reset();
-        
+
         // Redirigir a home después del login exitoso
         alert(`¡Bienvenido ${data.username}!`);
         window.location.href = 'home.html';
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const email = document.getElementById('forgotPasswordEmail').value;
       try {
-        const res = await fetch('http://localhost:3000/api/forgot-password', {
+        const res = await fetch(`${API_URL}/forgot-password`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })
@@ -242,32 +242,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cerrar modal si se hace click fuera del formulario
   if (loginContainer) {
-    loginContainer.addEventListener('click', function(e) {
+    loginContainer.addEventListener('click', function (e) {
       if (e.target === loginContainer) hideLoginModal();
     });
   }
   if (registerContainer) {
-    registerContainer.addEventListener('click', function(e) {
+    registerContainer.addEventListener('click', function (e) {
       if (e.target === registerContainer) hideRegisterModal();
     });
   }
 
   // Click en "Mi perfil"
   if (profileOption) {
-    profileOption.addEventListener('click', function(e) {
+    profileOption.addEventListener('click', function (e) {
       e.preventDefault();
       window.location.href = 'profile.html';
     });
   }
 
   // ========== CÓDIGO OAUTH - GOOGLE LOGIN (NUEVO) ==========
-  
+
   // Handler del botón de Google
   const googleBtn = document.getElementById('googleLoginBtn');
   if (googleBtn) {
     googleBtn.addEventListener('click', () => {
       // Redirigir a la ruta de autenticación de Google
-      window.location.href = 'http://localhost:3000/api/auth/google';
+      window.location.href = `${API_URL}/auth/google`;
     });
   }
 
@@ -283,42 +283,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (token) {
     // Obtener perfil del usuario con el token
-    fetch('http://localhost:3000/api/perfil', {
+    fetch(`${API_URL}/perfil`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(res => {
-      if (!res.ok) throw new Error('Error al obtener perfil');
-      return res.json();
-    })
-    .then(data => {
-      console.log('✅ Usuario autenticado con Google:', data);
-      
-      // Guardar sesión en el mismo formato que tu login normal
-      localStorage.setItem('session', JSON.stringify({
-        loggedIn: true,
-        username: data.username,
-        email: data.email,
-        token: token
-      }));
-      
-      // Actualizar la UI
-      updateUserUI();
-      
-      // Mostrar mensaje de éxito
-      alert(`¡Bienvenido ${data.username}!`);
-    })
-    .catch(err => {
-      console.error('Error al obtener perfil:', err);
-      alert('Error al obtener datos del usuario');
-    })
-    .finally(() => {
-      // Limpiar la URL (quitar el token visible)
-      window.history.replaceState({}, document.title, window.location.pathname);
-    });
+      .then(res => {
+        if (!res.ok) throw new Error('Error al obtener perfil');
+        return res.json();
+      })
+      .then(data => {
+        console.log('✅ Usuario autenticado con Google:', data);
+
+        // Guardar sesión en el mismo formato que tu login normal
+        localStorage.setItem('session', JSON.stringify({
+          loggedIn: true,
+          username: data.username,
+          email: data.email,
+          token: token
+        }));
+
+        // Actualizar la UI
+        updateUserUI();
+
+        // Mostrar mensaje de éxito
+        alert(`¡Bienvenido ${data.username}!`);
+      })
+      .catch(err => {
+        console.error('Error al obtener perfil:', err);
+        alert('Error al obtener datos del usuario');
+      })
+      .finally(() => {
+        // Limpiar la URL (quitar el token visible)
+        window.history.replaceState({}, document.title, window.location.pathname);
+      });
   }
-  
+
   // ============
 
   // Inicializar UI

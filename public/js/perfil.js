@@ -27,14 +27,14 @@ async function loadUserInfo() {
   document.getElementById('sidebarUserEmail').textContent = userEmail;
   document.getElementById('profileUsername').value = userName;
   document.getElementById('profileEmail').value = userEmail;
-  
+
   // Inicializar campos vacíos
   document.getElementById('profileBio').value = '';
   document.getElementById('profileWebsite').value = '';
 
   // Intentar obtener avatar desde el servidor
   try {
-    const response = await fetch('http://localhost:3000/api/profile/me', {
+    const response = await fetch(`${API_URL}/profile/me`, {
       headers: {
         'Authorization': `Bearer ${session.token}`
       }
@@ -43,7 +43,7 @@ async function loadUserInfo() {
     if (response.ok) {
       const data = await response.json();
       const avatarImg = document.getElementById('avatarImg');
-      
+
       // Cargar avatar
       if (data.user.avatar) {
         // Usar avatar del servidor
@@ -59,7 +59,7 @@ async function loadUserInfo() {
         const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=98ca3f&color=0f1419&size=100`;
         avatarImg.src = avatarUrl;
       }
-      
+
       // Cargar biografía y sitio web
       if (data.user.bio) {
         document.getElementById('profileBio').value = data.user.bio;
@@ -98,7 +98,7 @@ function setupNavigation() {
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      
+
       // Remover active de todos
       navItems.forEach(nav => nav.classList.remove('active'));
       sections.forEach(section => section.classList.remove('active'));
@@ -136,10 +136,10 @@ function setupEventListeners() {
 
   // Toggle password visibility
   document.querySelectorAll('.toggle-password').forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       const targetId = this.getAttribute('data-target');
       const input = document.getElementById(targetId);
-      
+
       if (input.type === 'password') {
         input.type = 'text';
         this.textContent = '🙈';
@@ -176,18 +176,18 @@ async function handleAvatarUpload(event) {
 
   // Comprimir y redimensionar la imagen
   const reader = new FileReader();
-  reader.onload = async function(e) {
+  reader.onload = async function (e) {
     const img = new Image();
-    img.onload = async function() {
+    img.onload = async function () {
       // Crear canvas para redimensionar
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       // Redimensionar a máximo 400x400 manteniendo proporción
       let width = img.width;
       let height = img.height;
       const maxSize = 400;
-      
+
       if (width > height) {
         if (width > maxSize) {
           height *= maxSize / width;
@@ -199,17 +199,17 @@ async function handleAvatarUpload(event) {
           height = maxSize;
         }
       }
-      
+
       canvas.width = width;
       canvas.height = height;
       ctx.drawImage(img, 0, 0, width, height);
-      
+
       // Convertir a base64 con calidad reducida
       const imageData = canvas.toDataURL('image/jpeg', 0.8);
-      
+
       // Actualizar la imagen en la UI inmediatamente
       document.getElementById('avatarImg').src = imageData;
-      
+
       // Guardar en localStorage
       const session = JSON.parse(localStorage.getItem('session'));
       if (session) {
@@ -219,7 +219,7 @@ async function handleAvatarUpload(event) {
 
       // Intentar guardar en el servidor
       try {
-        const response = await fetch('http://localhost:3000/api/profile/avatar', {
+        const response = await fetch(`${API_URL}/profile/avatar`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -271,7 +271,7 @@ async function saveProfile() {
   const website = document.getElementById('profileWebsite').value;
 
   try {
-    const response = await fetch('http://localhost:3000/api/profile/update', {
+    const response = await fetch(`${API_URL}/profile/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -319,7 +319,7 @@ async function changePassword() {
   const session = JSON.parse(localStorage.getItem('session'));
 
   try {
-    const response = await fetch('http://localhost:3000/api/profile/change-password', {
+    const response = await fetch(`${API_URL}/profile/change-password`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -346,10 +346,10 @@ async function changePassword() {
 // Eliminar cuenta
 function deleteAccount() {
   const confirmed = confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.');
-  
+
   if (confirmed) {
     const doubleConfirm = confirm('Esta es tu última oportunidad. ¿Realmente deseas eliminar tu cuenta permanentemente?');
-    
+
     if (doubleConfirm) {
       showNotification('Funcionalidad de eliminación de cuenta próximamente', 'info');
     }
@@ -362,7 +362,7 @@ async function loadPurchaseHistory() {
   if (!session || !session.token) return;
 
   try {
-    const response = await fetch('http://localhost:3000/api/courses/my-courses', {
+    const response = await fetch(`${API_URL}/courses/my-courses`, {
       headers: {
         'Authorization': `Bearer ${session.token}`
       }
@@ -382,11 +382,11 @@ async function loadPurchaseHistory() {
       <div class="purchase-item">
         <div class="purchase-info">
           <h4>${course.title}</h4>
-          <p>Comprado el ${new Date(course.purchasedAt).toLocaleDateString('es-ES', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-          })}</p>
+          <p>Comprado el ${new Date(course.purchasedAt).toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })}</p>
         </div>
         <div class="purchase-price">$${course.price?.toFixed(2) || '49.99'}</div>
       </div>
@@ -399,7 +399,7 @@ async function loadPurchaseHistory() {
 // Cargar métodos de pago
 function loadPaymentMethods() {
   const container = document.getElementById('paymentMethods');
-  
+
   // Datos de ejemplo
   const methods = [
     { type: 'Visa', last4: '4242', expiry: '12/25', icon: '💳' },
@@ -439,7 +439,7 @@ function removePaymentMethod(last4) {
 // Cargar notificaciones
 function loadNotifications() {
   const container = document.getElementById('notificationsList');
-  
+
   const notifications = [
     {
       title: 'Nuevo curso disponible',
@@ -475,7 +475,7 @@ function loadNotifications() {
 // Cargar mensajes
 function loadMessages() {
   const container = document.getElementById('messagesList');
-  
+
   const messages = [
     {
       sender: 'Soporte MuckSena',
@@ -508,7 +508,7 @@ function loadMessages() {
 // Cargar lista de deseos
 function loadWishlist() {
   const container = document.getElementById('wishlist');
-  
+
   const wishlist = [
     {
       title: 'Python Avanzado',
@@ -547,7 +547,7 @@ function loadCredits() {
   document.getElementById('creditsBalance').textContent = balance;
 
   const container = document.getElementById('creditsHistory');
-  
+
   const transactions = [
     { description: 'Compra de créditos', amount: 500, date: '2024-01-15', type: 'positive' },
     { description: 'Uso en curso premium', amount: -150, date: '2024-01-10', type: 'negative' },
@@ -558,11 +558,11 @@ function loadCredits() {
     <div class="credit-transaction">
       <div class="transaction-info">
         <h4>${trans.description}</h4>
-        <p>${new Date(trans.date).toLocaleDateString('es-ES', { 
-          day: 'numeric', 
-          month: 'long', 
-          year: 'numeric' 
-        })}</p>
+        <p>${new Date(trans.date).toLocaleDateString('es-ES', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  })}</p>
       </div>
       <div class="transaction-amount ${trans.type}">
         ${trans.amount > 0 ? '+' : ''}${trans.amount} créditos

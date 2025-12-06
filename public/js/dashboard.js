@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mostrar curso destacado
   function showCourses(category) {
     const featuredCourse = document.getElementById("featuredCourse");
+    if (!featuredCourse) return; // Salir si no existe el elemento
+
     featuredCourse.innerHTML = "";
 
     const courses = coursesByCategory[category] || [];

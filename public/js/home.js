@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Verificar si hay token en la URL (OAuth)
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get('token');
-  
+
   if (token) {
     // Guardar token de OAuth
     const session = {
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
       loggedIn: true
     };
     localStorage.setItem('session', JSON.stringify(session));
-    
+
     // Limpiar URL sin recargar
     window.history.replaceState({}, document.title, window.location.pathname);
-    
+
     // Obtener datos del usuario con el token
     fetchUserData(token);
   }
-  
+
   loadCourses();
   loadUserInfo();
   setupEventListeners();
@@ -103,19 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
 // Obtener datos del usuario desde el backend con el token
 async function fetchUserData(token) {
   try {
-    const response = await fetch('http://localhost:3000/api/perfil', {
+    const response = await fetch(`${API_URL}/perfil`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     });
-    
+
     if (response.ok) {
       const userData = await response.json();
       const session = JSON.parse(localStorage.getItem('session'));
       session.username = userData.username;
       session.email = userData.email;
       localStorage.setItem('session', JSON.stringify(session));
-      
+
       // Actualizar UI
       loadUserInfo();
     }
@@ -132,7 +132,7 @@ function loadUserInfo() {
     if (userName && session.username) {
       userName.textContent = session.username;
     }
-    
+
     // Actualizar avatar con iniciales del usuario
     const avatar = document.querySelector('.avatar');
     if (avatar && session.username) {
@@ -141,7 +141,7 @@ function loadUserInfo() {
   } else {
     // Si no hay sesión, redirigir al login
     window.location.href = 'home.html';
-   /*  window.location.href = 'dashboard.html'; */
+    /*  window.location.href = 'dashboard.html'; */
   }
 }
 
@@ -183,7 +183,7 @@ function loadCourses() {
 function attachCourseListeners() {
   const courseCards = document.querySelectorAll('.course-card');
   console.log('Agregando listeners a', courseCards.length, 'cursos');
-  
+
   courseCards.forEach(card => {
     card.style.cursor = 'pointer';
     card.addEventListener('click', (e) => {
@@ -207,7 +207,7 @@ function showMyCourses() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const coursesGrid = document.getElementById('coursesGrid');
   const sectionHeader = document.querySelector('.section-header h2');
-  
+
   if (cart.length === 0) {
     sectionHeader.textContent = 'Mis Cursos';
     coursesGrid.innerHTML = `
@@ -221,13 +221,13 @@ function showMyCourses() {
     `;
     return;
   }
-  
+
   sectionHeader.textContent = `Mis Cursos (${cart.length})`;
-  
+
   // Mostrar cursos comprados
   const purchasedCourseIds = cart.map(c => c.id);
   const myCourses = courses.filter(c => purchasedCourseIds.includes(c.id));
-  
+
   coursesGrid.innerHTML = myCourses.map(course => `
     <div class="course-card" data-course-id="${course.id}">
       <img src="${course.image}" alt="${course.title}" class="course-image">
@@ -250,7 +250,7 @@ function showMyCourses() {
       </div>
     </div>
   `).join('');
-  
+
   setTimeout(() => {
     attachCourseListeners();
   }, 100);
@@ -267,10 +267,10 @@ function setupEventListeners() {
       window.location.href = 'dashboard.html';
     });
   }
-  
+
   // Mis Cursos - Permitir navegación normal al enlace
   // El botón ahora navega directamente a mis-cursos.html
-  
+
   // Explorar
   const explorarBtn = document.getElementById('explorarBtn');
   if (explorarBtn) {
@@ -280,7 +280,7 @@ function setupEventListeners() {
       document.querySelector('.section-header h2').textContent = 'Cursos más populares';
     });
   }
-  
+
   // Rutas
   const rutasBtn = document.getElementById('rutasBtn');
   if (rutasBtn) {
@@ -301,7 +301,7 @@ function setupEventListeners() {
   // Búsqueda
   const searchInput = document.querySelector('.search-bar input');
   const searchBtn = document.querySelector('.search-btn');
-  
+
   if (searchBtn) {
     searchBtn.addEventListener('click', () => {
       const query = searchInput.value.trim();
@@ -352,7 +352,7 @@ function filterCoursesByCategory(category) {
   };
 
   const categoryName = categoryMap[category];
-  const filteredCourses = courses.filter(course => 
+  const filteredCourses = courses.filter(course =>
     course.category === categoryName
   );
 
@@ -366,7 +366,7 @@ function filterCoursesByCategory(category) {
 // Buscar cursos
 function searchCourses(query) {
   const lowerQuery = query.toLowerCase();
-  const results = courses.filter(course => 
+  const results = courses.filter(course =>
     course.title.toLowerCase().includes(lowerQuery) ||
     course.description.toLowerCase().includes(lowerQuery) ||
     course.category.toLowerCase().includes(lowerQuery)

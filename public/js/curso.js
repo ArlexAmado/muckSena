@@ -1,7 +1,7 @@
 // Cargar datos del curso desde localStorage
 document.addEventListener('DOMContentLoaded', () => {
   const courseData = JSON.parse(localStorage.getItem('selectedCourse'));
-  
+
   if (courseData) {
     loadCourseData(courseData);
   } else {
@@ -15,29 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=250&fit=crop'
     });
   }
-  
+
   // Inicializar tabs
   initializeTabs();
-  
+
   // Inicializar secciones del curriculum
   initializeCurriculum();
 });
 
 function loadCourseData(course) {
+  // Verificar si estamos en la página correcta
+  const titleElement = document.getElementById('courseTitle');
+  if (!titleElement) return;
+
   // Actualizar título y metadatos
-  document.getElementById('courseTitle').textContent = course.title;
+  titleElement.textContent = course.title;
   document.getElementById('courseSubtitle').textContent = course.description;
   document.getElementById('courseBadge').textContent = course.category;
   document.getElementById('courseBreadcrumb').textContent = course.title;
   document.getElementById('courseInstructor').textContent = course.instructor;
   document.getElementById('instructorName').textContent = course.instructor;
   document.getElementById('courseRating').textContent = course.rating;
-  
+
   // Actualizar imagen
   if (course.image) {
     document.getElementById('courseImage').src = course.image;
   }
-  
+
   // Actualizar título de la página
   document.title = `${course.title} - MuckSena`;
 }
@@ -45,13 +49,13 @@ function loadCourseData(course) {
 function initializeTabs() {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
-  
+
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
       // Remover active de todos
       tabButtons.forEach(btn => btn.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
-      
+
       // Agregar active al clickeado
       button.classList.add('active');
       const tabId = button.getAttribute('data-tab');
@@ -62,12 +66,12 @@ function initializeTabs() {
 
 function initializeCurriculum() {
   const sectionHeaders = document.querySelectorAll('.section-header');
-  
+
   sectionHeaders.forEach(header => {
     header.addEventListener('click', () => {
       const content = header.nextElementSibling;
       const icon = header.querySelector('.section-icon');
-      
+
       if (content && content.classList.contains('section-content')) {
         // Toggle visibility
         if (content.style.display === 'block') {
@@ -80,7 +84,7 @@ function initializeCurriculum() {
       }
     });
   });
-  
+
   // Abrir la primera sección por defecto
   const firstContent = document.querySelector('.section-content');
   if (firstContent) {
@@ -92,21 +96,21 @@ function initializeCurriculum() {
 document.addEventListener('DOMContentLoaded', () => {
   const buyButtons = document.querySelectorAll('.btn-primary');
   const cartButton = document.querySelector('.btn-secondary');
-  
+
   buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
       showPurchaseModal();
     });
   });
-  
+
   if (cartButton) {
     cartButton.addEventListener('click', (e) => {
       e.preventDefault();
       addToCart();
     });
   }
-  
+
   // Click en cursos relacionados
   const relatedCards = document.querySelectorAll('.related-card');
   relatedCards.forEach(card => {
@@ -122,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function showPurchaseModal() {
   const courseTitle = document.getElementById('courseTitle').textContent;
   const confirmed = confirm(`¿Deseas comprar el curso "${courseTitle}" por $49.99?\n\n✓ Acceso de por vida\n✓ Certificado de finalización\n✓ Garantía de 30 días`);
-  
+
   if (confirmed) {
     alert('¡Compra exitosa! 🎉\n\nRecibirás un email de confirmación.\nYa puedes comenzar el curso.');
     // Aquí iría la lógica real de compra
@@ -132,12 +136,12 @@ function showPurchaseModal() {
 async function addToCart() {
   const courseTitle = document.getElementById('courseTitle').textContent;
   const courseData = JSON.parse(localStorage.getItem('selectedCourse'));
-  
+
   if (!courseData) {
     showNotification('Error: No se pudo cargar el curso');
     return;
   }
-  
+
   // Obtener token de sesión
   const session = JSON.parse(localStorage.getItem('session'));
   if (!session || !session.token) {
@@ -147,9 +151,9 @@ async function addToCart() {
     }, 2000);
     return;
   }
-  
+
   try {
-    const response = await fetch('http://localhost:3000/api/courses/purchase', {
+    const response = await fetch(`${API_URL}/courses/purchase`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -166,9 +170,9 @@ async function addToCart() {
         price: 49.99
       })
     });
-    
+
     const data = await response.json();
-    
+
     if (response.ok) {
       showNotification(`"${courseTitle}" agregado a tus cursos 🎉`);
     } else {
@@ -198,7 +202,7 @@ function showNotification(message) {
   `;
   notification.textContent = message;
   document.body.appendChild(notification);
-  
+
   // Remover después de 3 segundos
   setTimeout(() => {
     notification.style.animation = 'slideOut 0.3s ease';
@@ -211,15 +215,15 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
   const floatingBuy = document.querySelector('.floating-buy');
   if (!floatingBuy) return;
-  
+
   const currentScroll = window.pageYOffset;
-  
+
   if (currentScroll > 500) {
     floatingBuy.style.transform = 'translateY(0)';
   } else {
     floatingBuy.style.transform = 'translateY(100%)';
   }
-  
+
   lastScroll = currentScroll;
 });
 
