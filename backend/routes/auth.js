@@ -9,8 +9,6 @@ const passport = require('../../backend/passport');  // Cambiado a ruta absoluta
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'tu_clave_secreta';
 
-import(resend) from 'resend';
-
 
 // Registro de usuario
 router.post('/register', async (req, res) => {
