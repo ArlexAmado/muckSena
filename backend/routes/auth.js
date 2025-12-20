@@ -187,11 +187,19 @@ router.get('/auth/google',
 
 // Ruta 2: Callback de Google (donde Google redirige después del login)
 router.get('/auth/google/callback',
+  (req, res, next) => {
+    console.log('🔵 Google Callback /api/auth/google/callback hit!');
+    console.log('Query Params:', req.query);
+    next();
+  },
   passport.authenticate('google', {
     session: false,
     failureRedirect: '/login?error=google_auth_failed'
   }),
   (req, res) => {
+    console.log('✅ Google Auth Success via Passport');
+    console.log('User:', req.user);
+
     // Generar JWT para el usuario
     const token = jwt.sign(
       {
@@ -202,18 +210,11 @@ router.get('/auth/google/callback',
       { expiresIn: '2h' }
     );
 
-    /*    // URL del frontend (usando Live Server)
-       const frontendUrl = 'http://127.0.0.1:5500';
-       
-       // Redirigir al dashboard con el token (archivo en la raíz)
-       res.redirect(`${frontendUrl}/dashboard.html?token=${token}`);
-     } */
-
     // Usa la URL definida en .env o por defecto el 5501
     const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501';
+    console.log('Redirecting to frontend:', `${frontendUrl}/home.html?token=...`);
     res.redirect(`${frontendUrl}/home.html?token=${token}`);
   }
-
 );
 
 module.exports = router;
