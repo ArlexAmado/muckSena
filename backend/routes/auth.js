@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../backend/models/User');  // Cambiado a ruta absoluta desde la raíz del proyecto
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const bcrypt = require('bcrypt');
 //for oauth
 const passport = require('../../backend/passport');  // Cambiado a ruta absoluta
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'tu_clave_secreta';
+
+import(resend) from 'resend';
 
 
 // Registro de usuario
@@ -87,61 +89,69 @@ router.post('/forgot-password', async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
     await user.save();
 
-    // Configurar transporter usando variables de entorno si están disponibles
-    // En desarrollo, si no hay credenciales, usamos una cuenta de prueba (Ethereal)
-    let transporter;
-    let usingTestAccount = false;
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-      transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE || 'gmail',
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
+    // Validar que la API key de Resend esté configurada
+    if (!process.env.RESEND_API_KEY) {
+      console.error('ERROR: RESEND_API_KEY no está configurado en las variables de entorno');
+      return res.status(500).json({
+        message: 'Error de configuración del servidor. Contacta al administrador.',
+        error: 'Resend API key not configured'
       });
-    } else {
-      // Crear cuenta de prueba (Ethereal) para desarrollo
-      const testAccount = await nodemailer.createTestAccount();
-      transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false,
-        auth: {
-          user: testAccount.user,
-          pass: testAccount.pass
-        }
-      });
-      usingTestAccount = true;
-      console.log('Usando cuenta de prueba de nodemailer:', testAccount);
     }
 
-    // Enlace de recuperación (ajusta la URL a tu frontend). Se puede configurar con FRONTEND_URL en .env
+    // Inicializar cliente de Resend
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     // Enlace de recuperación
-    // NOTA: Si pruebas localmente con Live Server desde la raíz, y el archivo está en public/, 
-    // asegura que FRONTEND_URL apunte a http://127.0.0.1:5501/public o ajusta tu entorno.
-    // Para producción (Render static site), será la raíz.
     const frontendUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501/public';
     const resetUrl = `${frontendUrl}/reset-password.html?token=${token}`;
 
-    // Envía el correo
-    const info = await transporter.sendMail({
+    // Email desde donde se enviará (usa el configurado o el de prueba de Resend)
+    const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+
+    // Enviar el correo usando Resend
+    const { data, error } = await resend.emails.send({
+      from: `MuckSena <${fromEmail}>`,
       to: user.email,
-      subject: 'Recupera tu contraseña',
-      html: `<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-             <a href="${resetUrl}">${resetUrl}</a>`
+      subject: 'Recupera tu contraseña - MuckSena',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">Recuperación de Contraseña</h2>
+          <p>Hola,</p>
+          <p>Recibimos una solicitud para restablecer tu contraseña en MuckSena.</p>
+          <p>Haz clic en el siguiente botón para crear una nueva contraseña:</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetUrl}" 
+               style="background-color: #4CAF50; color: white; padding: 12px 24px; 
+                      text-decoration: none; border-radius: 4px; display: inline-block;">
+              Restablecer Contraseña
+            </a>
+          </div>
+          <p>O copia y pega este enlace en tu navegador:</p>
+          <p style="color: #666; word-break: break-all;">${resetUrl}</p>
+          <p style="color: #999; font-size: 12px; margin-top: 30px;">
+            Este enlace expirará en 1 hora. Si no solicitaste este cambio, ignora este correo.
+          </p>
+        </div>
+      `
     });
 
-    // Si usamos cuenta de prueba, devolver URL de preview para facilitar pruebas
-    if (usingTestAccount) {
-      const preview = nodemailer.getTestMessageUrl(info);
-      console.log('Preview URL (Ethereal):', preview);
-      return res.json({ message: 'Correo de recuperación enviado (Ethereal).', previewUrl: preview });
+    if (error) {
+      console.error('Error al enviar email con Resend:', error);
+      return res.status(500).json({
+        message: 'Error al enviar el correo de recuperación.',
+        error: process.env.NODE_ENV === 'production' ? undefined : error.message
+      });
     }
 
-    res.json({ message: 'Correo de recuperación enviado.' });
+    console.log(`Correo de recuperación enviado a: ${user.email} (ID: ${data.id})`);
+    res.json({ message: 'Correo de recuperación enviado. Revisa tu bandeja de entrada.' });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error en el servidor.' });
+    console.error('Error en forgot-password:', err);
+    res.status(500).json({
+      message: 'Error al enviar el correo de recuperación.',
+      error: process.env.NODE_ENV === 'production' ? undefined : err.message
+    });
   }
 });
 
